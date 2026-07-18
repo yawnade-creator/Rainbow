@@ -47,12 +47,14 @@ def parse_when(time_str, date_str=None):
     return when
 
 
-def build_ical(when_local, msg, minutes_before=0, duration_min=15):
+def build_ical(when_local, msg, minutes_before=0, duration_min=15, notes=None):
     start_utc = when_local.astimezone(timezone.utc)
     ev = Event()
     ev.add("uid", f"{uuid.uuid4()}@remind.local")
     ev.add("dtstamp", datetime.now(timezone.utc))
     ev.add("summary", msg)
+    if notes:
+        ev.add("description", notes)
     ev.add("dtstart", start_utc)
     ev.add("dtend", start_utc + timedelta(minutes=duration_min))
     alarm = Alarm()
@@ -73,13 +75,14 @@ def main():
     p.add_argument("--date")
     p.add_argument("--msg", required=True)
     p.add_argument("--before", type=int, default=0)
+    p.add_argument("--notes")
     p.add_argument("--calendar")
     a = p.parse_args()
 
     when = parse_when(a.time, a.date)
     client = get_client()
     cal = pick_calendar(client, a.calendar)
-    cal.save_event(build_ical(when, a.msg, a.before))
+    cal.save_event(build_ical(when, a.msg, a.before, notes=a.notes))
     print(f"done: {when.strftime('%Y-%m-%d %H:%M')} — {a.msg}")
 
 
