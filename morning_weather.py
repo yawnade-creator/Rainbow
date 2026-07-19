@@ -56,6 +56,8 @@ def get_weather():
         QWEATHER_API,
         params={"location": BEIJING, "key": key},
     )
+    print(f"[debug] status={resp.status_code}")
+    print(f"[debug] body={resp.text[:500]}")
     data = resp.json()
     if data.get("code") != "200":
         print(f"weather API error: {data.get('code')}")
