@@ -11,7 +11,7 @@ from datetime import datetime, timedelta, timezone
 import requests
 from remind import get_client, pick_calendar, build_ical
 
-QWEATHER_API = "https://devapi.qweather.com/v7/weather/3d"
+QWEATHER_API = "https://api.qweather.com/v7/weather/3d"
 BEIJING = "101010100"
 
 MORNING_WORDS = [
