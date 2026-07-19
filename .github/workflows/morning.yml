@@ -1,0 +1,26 @@
+name: Morning Weather Reminder
+
+on:
+  schedule:
+    - cron: '55 1 * * *'  # UTC 1:55 = 北京时间 9:55
+  workflow_dispatch:        # 手动触发，用来测试
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install caldav icalendar requests
+
+      - name: Send morning reminder
+        run: python morning_weather.py
+        env:
+          ICLOUD_USER: ${{ secrets.ICLOUD_USER }}
+          ICLOUD_APP_PW: ${{ secrets.ICLOUD_APP_PW }}
+          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
