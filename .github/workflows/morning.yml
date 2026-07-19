@@ -23,4 +23,3 @@ jobs:
         env:
           ICLOUD_USER: ${{ secrets.ICLOUD_USER }}
           ICLOUD_APP_PW: ${{ secrets.ICLOUD_APP_PW }}
-          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}

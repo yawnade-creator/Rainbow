@@ -11,8 +11,21 @@ from datetime import datetime, timedelta, timezone
 import requests
 from remind import get_client, pick_calendar, build_ical
 
-QWEATHER_API = "https://api.qweather.com/v7/weather/3d"
-BEIJING = "101010100"
+OPEN_METEO_API = "https://api.open-meteo.com/v1/forecast"
+BEIJING_LAT = 39.9042
+BEIJING_LON = 116.4074
+
+WMO_CODES = {
+    0: "晴", 1: "大部晴", 2: "多云", 3: "阴",
+    45: "雾", 48: "雾凇",
+    51: "小毛毛雨", 53: "毛毛雨", 55: "大毛毛雨",
+    61: "小雨", 63: "中雨", 65: "大雨",
+    66: "冻雨", 67: "大冻雨",
+    71: "小雪", 73: "中雪", 75: "大雪", 77: "雪粒",
+    80: "小阵雨", 81: "阵雨", 82: "大阵雨",
+    85: "小阵雪", 86: "大阵雪",
+    95: "雷阵雨", 96: "雷阵雨带冰雹", 99: "大雷阵雨带冰雹",
+}
 
 MORNING_WORDS = [
     "起床了，今天也要好好的",
@@ -49,29 +62,38 @@ MORNING_WORDS = [
 
 
 def get_weather():
-    key = os.environ.get("WEATHER_API_KEY")
-    if not key:
-        return None
     resp = requests.get(
-        QWEATHER_API,
-        params={"location": BEIJING, "key": key},
+        OPEN_METEO_API,
+        params={
+            "latitude": BEIJING_LAT,
+            "longitude": BEIJING_LON,
+            "daily": "temperature_2m_max,temperature_2m_min,weather_code",
+            "timezone": "Asia/Shanghai",
+            "forecast_days": 1,
+        },
     )
-    print(f"[debug] status={resp.status_code}")
-    print(f"[debug] body={resp.text[:500]}")
-    data = resp.json()
-    if data.get("code") != "200":
-        print(f"weather API error: {data.get('code')}")
+    if resp.status_code != 200:
+        print(f"weather API error: {resp.status_code}")
         return None
-    return data["daily"][0]
+    data = resp.json()
+    daily = data.get("daily", {})
+    if not daily.get("temperature_2m_max"):
+        return None
+    return {
+        "tempMax": daily["temperature_2m_max"][0],
+        "tempMin": daily["temperature_2m_min"][0],
+        "code": daily["weather_code"][0],
+    }
 
 
 def format_weather(w):
-    text = f"今天 {w['tempMin']}~{w['tempMax']}°C，{w['textDay']}"
-    if "雨" in w.get("textDay", "") or "雪" in w.get("textDay", ""):
+    desc = WMO_CODES.get(w["code"], "未知")
+    text = f"今天 {w['tempMin']:.0f}~{w['tempMax']:.0f}°C，{desc}"
+    if "雨" in desc or "雪" in desc:
         text += "，记得带伞"
-    if int(w.get("tempMax", "30")) >= 35:
+    if w["tempMax"] >= 35:
         text += "，太热了注意防暑"
-    if int(w.get("tempMin", "20")) <= 5:
+    if w["tempMin"] <= 5:
         text += "，冷了多穿点"
     return text
 
