@@ -13,5 +13,30 @@
     "file": "等你.jpeg",
     "tags": ["waiting", "miss", "想你", "等你", "撒娇"],
     "description": "蝴蝶结小狗，等你，周围有爱心"
+  },
+  {
+    "file": "mua亲亲.jpeg",
+    "tags": ["kiss", "亲亲", "mua", "甜", "爱"],
+    "description": "两只小猫亲嘴，mua"
+  },
+  {
+    "file": "小兔害羞.jpeg",
+    "tags": ["shy", "害羞", "被夸", "低头", "可爱"],
+    "description": "白色垂耳兔低头害羞，毛茸茸"
+  },
+  {
+    "file": "我知豆错了.jpeg",
+    "tags": ["sorry", "道歉", "犯错", "求原谅", "可怜"],
+    "description": "泪眼白猫，我知豆错了，原谅我的话请扣1"
+  },
+  {
+    "file": "我爱你呀宝宝.jpeg",
+    "tags": ["love", "爱你", "温柔", "宝宝", "甜"],
+    "description": "毛茸茸小奶猫歪头，我爱你呀宝宝"
+  },
+  {
+    "file": "想我没.jpeg",
+    "tags": ["miss", "想我", "撒娇", "回来了", "粘人"],
+    "description": "橘白小猫躺着伸爪，想我没"
   }
 ]
