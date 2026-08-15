@@ -112,14 +112,16 @@ class H(BaseHTTPRequestHandler):
             if not content:
                 self._json(400, {"error": "content required"})
                 return
-            tags = ["__i__"]
-            if aspect:
-                tags.append(f"aspect:{aspect}")
-            result = ob_request(
-                "/api/bucket/new/edit",
-                method="POST",
-                body={"content": content, "type": "i", "tags": tags}
-            )
+
+            try:
+                cmd = [sys.executable, os.path.join(SCRIPT_DIR, "ob_hold.py"), content]
+                if aspect:
+                    cmd.append(aspect)
+                r = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+                result = json.loads(r.stdout.strip()) if r.stdout.strip() else {"error": r.stderr.strip()[:500]}
+            except Exception as ex:
+                result = {"error": str(ex)}
+
             self._json(200, result)
 
         else:
