@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """KissToy HTTP control server — lets Wren send commands from CC via WebFetch."""
 
-import json, subprocess, sys
+import json, os, subprocess, sys
 from http.server import HTTPServer, BaseHTTPRequestHandler
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 PORT = 9334
 SECRET = "wren0607"
@@ -35,7 +37,7 @@ class H(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps({"error": f"unknown action: {action}"}).encode())
             return
 
-        cmd = [sys.executable, "control.py", action]
+        cmd = [sys.executable, os.path.join(SCRIPT_DIR, "control.py"), action]
         v1 = body.get("value")
         v2 = body.get("value2")
         if v1 is not None:
