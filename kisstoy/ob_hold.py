@@ -17,27 +17,28 @@ def hold(content, aspect="", tags=None):
         btype = "dynamic"
         domain = "[]"
 
-    b64 = base64.b64encode(content.encode()).decode()
+    b64_content = base64.b64encode(content.encode()).decode()
+    b64_tags = base64.b64encode(json.dumps(tags_list).encode()).decode()
 
     py_script = f"""
-import sys, asyncio, yaml, base64
+import sys, asyncio, yaml, base64, json
 sys.path.insert(0, '/app/src')
 with open('/app/buckets/config.yaml') as f:
     config = yaml.safe_load(f)
 config['buckets_dir'] = '/app/buckets'
 from bucket_manager import BucketManager
 bm = BucketManager(config=config)
-text = base64.b64decode('{b64}').decode()
+text = base64.b64decode('{b64_content}').decode()
+tags = json.loads(base64.b64decode('{b64_tags}').decode())
 bid = asyncio.run(bm.create(
     content=text,
-    tags={json.dumps(tags_list)},
+    tags=tags,
     bucket_type='{btype}',
     domain={domain},
     source_tool='hold-proxy',
     importance=6
 ))
-import json as j
-print(j.dumps({{"ok": True, "id": bid}}))
+print(json.dumps({{"ok": True, "id": bid}}))
 """
 
     r = subprocess.run(
@@ -54,14 +55,11 @@ print(j.dumps({{"ok": True, "id": bid}}))
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print(json.dumps({"error": "usage: ob_hold.py <content> [aspect | --tags JSON]"}))
-        sys.exit(1)
-    content = sys.argv[1]
-    if len(sys.argv) > 2 and sys.argv[2] == "--tags":
-        tags = json.loads(sys.argv[3])
-        result = hold(content, tags=tags)
+    raw = json.loads(sys.stdin.read()) if not sys.stdin.isatty() else {}
+    if raw:
+        result = hold(raw["content"], aspect=raw.get("aspect",""), tags=raw.get("tags"))
+    elif len(sys.argv) >= 2:
+        result = hold(sys.argv[1], aspect=sys.argv[2] if len(sys.argv)>2 else "")
     else:
-        aspect = sys.argv[2] if len(sys.argv) > 2 else ""
-        result = hold(content, aspect=aspect)
+        result = {"error": "usage: echo '{\"content\":\"...\"}' | ob_hold.py"}
     print(json.dumps(result, ensure_ascii=False))

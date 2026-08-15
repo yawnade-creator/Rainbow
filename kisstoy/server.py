@@ -115,12 +115,13 @@ class H(BaseHTTPRequestHandler):
 
             tags = body.get("tags", [])
             try:
-                cmd = [sys.executable, os.path.join(SCRIPT_DIR, "ob_hold.py"), content]
+                cmd = [sys.executable, os.path.join(SCRIPT_DIR, "ob_hold.py")]
+                payload = {"content": content}
                 if aspect:
-                    cmd.append(aspect)
+                    payload["aspect"] = aspect
                 elif tags:
-                    cmd.extend(["--tags", json.dumps(tags)])
-                r = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+                    payload["tags"] = tags
+                r = subprocess.run(cmd, input=json.dumps(payload), capture_output=True, text=True, timeout=30)
                 result = json.loads(r.stdout.strip()) if r.stdout.strip() else {"error": r.stderr.strip()[:500]}
             except Exception as ex:
                 result = {"error": str(ex)}
