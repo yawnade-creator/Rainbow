@@ -1,22 +1,26 @@
 #!/usr/bin/env python3
 """Write a new self/i entry into OB via docker exec."""
 
-import json, subprocess, sys
+import base64, json, subprocess, sys
 
 def hold(content, aspect=""):
     tags_list = ["__i__"]
     if aspect:
         tags_list.append(f"aspect:{aspect}")
 
+    b64 = base64.b64encode(content.encode()).decode()
+
     py_script = f"""
-import sys, asyncio
+import sys, asyncio, yaml, base64
 sys.path.insert(0, '/app/src')
-
+with open('/app/buckets/config.yaml') as f:
+    config = yaml.safe_load(f)
+config['buckets_dir'] = '/app/buckets'
 from bucket_manager import BucketManager
-bm = BucketManager(config={{'buckets_dir':'/app/data/buckets'}})
-
+bm = BucketManager(config=config)
+text = base64.b64decode('{b64}').decode()
 bid = asyncio.run(bm.create(
-    content={json.dumps(content)},
+    content=text,
     tags={json.dumps(tags_list)},
     bucket_type='i',
     domain=['self'],
