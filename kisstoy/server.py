@@ -4,7 +4,7 @@
 import json, os, subprocess, sys
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+SCRIPT_DIR = os.environ.get("KISSTOY_DIR", os.path.dirname(os.path.abspath(__file__)))
 
 PORT = 9334
 SECRET = "wren0607"
