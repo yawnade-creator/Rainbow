@@ -10,8 +10,8 @@ def hold(content, aspect=""):
 
     py_script = f"""
 import sys, os
-sys.path.insert(0, '/app')
-os.chdir('/app')
+sys.path.insert(0, '/app/src')
+os.chdir('/app/src')
 
 from bucket_manager import BucketManager
 bm = BucketManager()
