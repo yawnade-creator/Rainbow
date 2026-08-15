@@ -113,10 +113,13 @@ class H(BaseHTTPRequestHandler):
                 self._json(400, {"error": "content required"})
                 return
 
+            tags = body.get("tags", [])
             try:
                 cmd = [sys.executable, os.path.join(SCRIPT_DIR, "ob_hold.py"), content]
                 if aspect:
                     cmd.append(aspect)
+                elif tags:
+                    cmd.extend(["--tags", json.dumps(tags)])
                 r = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
                 result = json.loads(r.stdout.strip()) if r.stdout.strip() else {"error": r.stderr.strip()[:500]}
             except Exception as ex:
