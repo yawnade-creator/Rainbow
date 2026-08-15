@@ -9,22 +9,22 @@ def hold(content, aspect=""):
         tags_list.append(f"aspect:{aspect}")
 
     py_script = f"""
-import sys, os
+import sys, asyncio
 sys.path.insert(0, '/app/src')
-os.chdir('/app/src')
 
 from bucket_manager import BucketManager
-bm = BucketManager()
+bm = BucketManager(config={{'buckets_dir':'/app/data/buckets'}})
 
-tags = {json.dumps(tags_list)}
-result = bm.merge_or_create(
+bid = asyncio.run(bm.create(
     content={json.dumps(content)},
+    tags={json.dumps(tags_list)},
     bucket_type='i',
-    tags=tags,
-    source_tool='I'
-)
-import json
-print(json.dumps({{"ok": True, "id": result.get("id",""), "action": result.get("action","")}}))
+    domain=['self'],
+    source_tool='I',
+    importance=6
+))
+import json as j
+print(j.dumps({{"ok": True, "id": bid}}))
 """
 
     r = subprocess.run(
@@ -33,7 +33,7 @@ print(json.dumps({{"ok": True, "id": result.get("id",""), "action": result.get("
     )
     if r.returncode == 0:
         try:
-            return json.loads(r.stdout.strip())
+            return json.loads(r.stdout.strip().split('\n')[-1])
         except:
             return {"ok": True, "output": r.stdout.strip()}
     else:
