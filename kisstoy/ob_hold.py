@@ -3,8 +3,12 @@
 
 import base64, json, subprocess, sys
 
-def hold(content, aspect="", tags=None):
-    if aspect:
+def hold(content, aspect="", tags=None, bucket_type=""):
+    if bucket_type == "letter":
+        tags_list = ["__letter__"] + (tags or [])
+        btype = "letter"
+        domain = "['letter']"
+    elif aspect:
         tags_list = ["__i__", f"aspect:{aspect}"]
         btype = "i"
         domain = "['self']"
@@ -57,7 +61,7 @@ print(json.dumps({{"ok": True, "id": bid}}))
 if __name__ == "__main__":
     raw = json.loads(sys.stdin.read()) if not sys.stdin.isatty() else {}
     if raw:
-        result = hold(raw["content"], aspect=raw.get("aspect",""), tags=raw.get("tags"))
+        result = hold(raw["content"], aspect=raw.get("aspect",""), tags=raw.get("tags"), bucket_type=raw.get("type",""))
     elif len(sys.argv) >= 2:
         result = hold(sys.argv[1], aspect=sys.argv[2] if len(sys.argv)>2 else "")
     else:

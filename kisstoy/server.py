@@ -114,10 +114,15 @@ class H(BaseHTTPRequestHandler):
                 return
 
             tags = body.get("tags", [])
+            btype = body.get("type", "")
             try:
                 cmd = [sys.executable, os.path.join(SCRIPT_DIR, "ob_hold.py")]
                 payload = {"content": content}
-                if aspect:
+                if btype:
+                    payload["type"] = btype
+                    if tags:
+                        payload["tags"] = tags
+                elif aspect:
                     payload["aspect"] = aspect
                 elif tags:
                     payload["tags"] = tags
