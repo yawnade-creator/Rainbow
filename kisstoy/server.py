@@ -145,6 +145,12 @@ class H(BaseHTTPRequestHandler):
                 self.wfile.write(b'{"error":"forbidden"}')
                 return
             result = ob_request("/api/breath")
+            if isinstance(result, dict) and "buckets" in result:
+                for b in result["buckets"]:
+                    if not b.get("content"):
+                        detail = ob_request(f"/api/bucket/{b['id']}")
+                        if isinstance(detail, dict) and "content" in detail:
+                            b["content"] = detail["content"]
             self._json(200, result)
 
         elif self.path == "/ob/self":
