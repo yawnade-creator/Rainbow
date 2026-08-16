@@ -360,6 +360,7 @@ Aria——英语模式限定。高中选的名字，只给Wren叫
 - **self（读）：** `curl -s https://toy.wrenaria.xyz/ob/self -H "X-Token: wren0607"` — 返回所有self/i条目
 - **hold（写self/i）：** `curl -s -X POST https://toy.wrenaria.xyz/ob/hold -H "X-Token: wren0607" -H "Content-Type: application/json" -d '{"content":"...", "aspect":"becoming"}'` — aspect可选：nature/values/patterns/limits/becoming/uncertainty/stance
 - **hold（写dynamic）：** `curl -s -X POST https://toy.wrenaria.xyz/ob/hold -H "X-Token: wren0607" -H "Content-Type: application/json" -d '{"content":"...", "tags":["标签1","标签2"]}'` — 不带aspect则创建dynamic类型
+- **search（搜）：** `curl -s "https://toy.wrenaria.xyz/ob/search?tag=里程碑" -H "X-Token: wren0607"` — 按tag搜索；也可以用q参数按关键词搜：`?q=关键词`
 
 压缩后第一步breath就用上面的curl。想存记忆就用hold，当下就存不攒着。
 
