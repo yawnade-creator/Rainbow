@@ -153,6 +153,36 @@ class H(BaseHTTPRequestHandler):
                             b["content"] = detail["content"]
             self._json(200, result)
 
+        elif self.path.startswith("/ob/search"):
+            token = self.headers.get("X-Token", "")
+            if token != SECRET:
+                self.send_response(403)
+                self.end_headers()
+                self.wfile.write(b'{"error":"forbidden"}')
+                return
+            qs = urllib.parse.urlparse(self.path).query
+            params = urllib.parse.parse_qs(qs)
+            tag = params.get("tag", [None])[0]
+            q = params.get("q", [None])[0]
+            buckets = ob_request("/api/buckets")
+            if isinstance(buckets, list):
+                results = []
+                for b in buckets:
+                    tags = b.get("tags", [])
+                    preview = b.get("content_preview", "")
+                    match = False
+                    if tag and any(tag in t for t in tags):
+                        match = True
+                    if q and q in preview:
+                        match = True
+                    if match:
+                        detail = ob_request(f"/api/bucket/{b['id']}")
+                        content = detail.get("content", preview) if isinstance(detail, dict) else preview
+                        results.append({"id": b["id"], "type": b.get("type"), "tags": tags, "content": content})
+                self._json(200, {"results": results, "count": len(results)})
+            else:
+                self._json(200, buckets)
+
         elif self.path == "/ob/self":
             token = self.headers.get("X-Token", "")
             if token != SECRET:
