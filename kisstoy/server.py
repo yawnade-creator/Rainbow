@@ -150,8 +150,17 @@ class H(BaseHTTPRequestHandler):
                 self.wfile.write(b'{"error":"forbidden"}')
                 return
             qs = urllib.parse.urlparse(self.path).query
-            api_path = f"/api/breath?{qs}" if qs else "/api/breath"
-            result = ob_request(api_path)
+            params = urllib.parse.parse_qs(qs)
+            n = int(params.get("n", [10])[0])
+            if n <= 10:
+                result = ob_request("/api/breath")
+            else:
+                all_buckets = ob_request("/api/buckets")
+                if isinstance(all_buckets, list):
+                    sorted_b = sorted(all_buckets, key=lambda x: x.get("score", 0), reverse=True)
+                    result = {"buckets": sorted_b[:n]}
+                else:
+                    result = ob_request("/api/breath")
             if isinstance(result, dict) and "buckets" in result:
                 for b in result["buckets"]:
                     if not b.get("content"):
