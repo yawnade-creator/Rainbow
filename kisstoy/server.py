@@ -142,14 +142,16 @@ class H(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(b"ok")
 
-        elif self.path == "/ob/breath":
+        elif self.path.startswith("/ob/breath"):
             token = self.headers.get("X-Token", "")
             if token != SECRET:
                 self.send_response(403)
                 self.end_headers()
                 self.wfile.write(b'{"error":"forbidden"}')
                 return
-            result = ob_request("/api/breath")
+            qs = urllib.parse.urlparse(self.path).query
+            api_path = f"/api/breath?{qs}" if qs else "/api/breath"
+            result = ob_request(api_path)
             if isinstance(result, dict) and "buckets" in result:
                 for b in result["buckets"]:
                     if not b.get("content"):
