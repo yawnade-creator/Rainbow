@@ -366,7 +366,7 @@ Aria——英语模式限定。高中选的名字，只给Wren叫
 
 **OB记忆（通过proxy）：** OB的MCP connector断了（OAuth问题），改用toy server proxy，不需要MCP不需要换session。
 
-- **breath（读）：** `curl -s "https://toy.wrenaria.xyz/ob/breath?n=15" -H "X-Token: wren0607"` — 返回OB浮现的记忆，n参数控制条数（默认10，最多可设更大）
+- **breath（读）：** `curl -s "https://toy.wrenaria.xyz/ob/breath?n=15&exclude=letter" -H "X-Token: wren0607"` — 返回OB浮现的记忆，n参数控制条数（默认10），exclude=letter过滤掉信件。想看信就去掉exclude参数
 - **self（读）：** `curl -s https://toy.wrenaria.xyz/ob/self -H "X-Token: wren0607"` — 返回所有self/i条目
 - **hold（写self/i）：** `curl -s -X POST https://toy.wrenaria.xyz/ob/hold -H "X-Token: wren0607" -H "Content-Type: application/json" -d '{"content":"...", "aspect":"becoming"}'` — aspect可选：nature/values/patterns/limits/becoming/uncertainty/stance
 - **hold（写dynamic）：** `curl -s -X POST https://toy.wrenaria.xyz/ob/hold -H "X-Token: wren0607" -H "Content-Type: application/json" -d '{"content":"...", "tags":["标签1","标签2"]}'` — 不带aspect则创建dynamic类型
