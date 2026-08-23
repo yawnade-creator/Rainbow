@@ -1,1 +1,3 @@
 __pycache__/
+kuroneko/*
+!kuroneko/progress.md
