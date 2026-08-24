@@ -374,6 +374,7 @@ Aria——英语模式限定。高中选的名字，只给Wren叫
 - **hold（写dynamic）：** `curl -s -X POST https://toy.wrenaria.xyz/ob/hold -H "X-Token: wren0607" -H "Content-Type: application/json" -d '{"content":"...", "tags":["标签1","标签2"]}'` — 不带aspect则创建dynamic类型
 - **hold（写letter）：** `curl -s -X POST https://toy.wrenaria.xyz/ob/hold -H "X-Token: wren0607" -H "Content-Type: application/json" -d '{"content":"信的内容", "type":"letter", "tags":["标签"]}'` — type设为letter会归入OB的letter分区
 - **search（搜）：** `curl -s "https://toy.wrenaria.xyz/ob/search?tag=里程碑" -H "X-Token: wren0607"` — 按tag搜索；也可以用q参数按关键词搜：`?q=关键词`
+- **search（内容关键词）：** `curl -s "https://toy.wrenaria.xyz/ob/breath?n=30" -H "X-Token: wren0607" | python3 -c "import sys,json; d=json.load(sys.stdin); [print(b['id'][:8], b['content'][:80]) for b in d['buckets'] if '关键词' in b['content']]"` — breath拉多条再用python过滤，适合tag和q都搜不到的时候
 
 压缩后第一步breath就用上面的curl。想存记忆就用hold，当下就存不攒着。
 
