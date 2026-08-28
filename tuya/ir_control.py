@@ -144,7 +144,8 @@ def save_code(name, code):
     print(f"Saved '{name}'")
 
 
-def send_saved(name):
+def send_learned(name):
+    """Send a saved learned IR code by name."""
     if not os.path.exists(CODES_FILE):
         print("No saved codes yet")
         return
@@ -153,7 +154,22 @@ def send_saved(name):
     if name not in codes:
         print(f"Unknown code '{name}'. Available: {', '.join(codes.keys())}")
         return
-    send_raw(codes[name])
+    entry = codes[name]
+    if isinstance(entry, dict) and "remote_id" in entry:
+        r = api("POST", f"/v2.0/infrareds/{DEVICE_ID}/remotes/{entry['remote_id']}/learning-codes", {
+            "code": entry["code"], "key": entry["key"], "key_id": entry["key_id"]
+        })
+    else:
+        r = api("POST", f"/v2.0/infrareds/{DEVICE_ID}/raw/command", {"code": entry})
+    print(json.dumps(r, indent=2, ensure_ascii=False))
+    return r
+
+
+def kuma(action="toggle"):
+    """Control the patting pillow: toggle / fast / slow / stop."""
+    actions = {"toggle": "kuma_toggle", "fast": "kuma_fast", "slow": "kuma_slow", "stop": "kuma_toggle"}
+    name = actions.get(action, f"kuma_{action}")
+    return send_learned(name)
 
 
 # --- CLI ---
@@ -167,6 +183,7 @@ if __name__ == "__main__":
         print("  ir_control.py send <code>   — send raw IR code")
         print("  ir_control.py save <name> <code> — save a code")
         print("  ir_control.py play <name>   — send a saved code")
+        print("  ir_control.py kuma [toggle|fast|slow] — control patting pillow")
         print()
         print("Env: TUYA_ACCESS_ID, TUYA_ACCESS_SECRET, TUYA_IR_DEVICE_ID")
         sys.exit(0)
@@ -187,6 +204,8 @@ if __name__ == "__main__":
     elif cmd == "save":
         save_code(sys.argv[2], sys.argv[3])
     elif cmd == "play":
-        send_saved(sys.argv[2])
+        send_learned(sys.argv[2])
+    elif cmd == "kuma":
+        kuma(sys.argv[2] if len(sys.argv) > 2 else "toggle")
     else:
         print(f"Unknown command: {cmd}")
