@@ -13,7 +13,7 @@ import requests
 ACCESS_ID = os.environ.get("TUYA_ACCESS_ID", "")
 ACCESS_SECRET = os.environ.get("TUYA_ACCESS_SECRET", "")
 DEVICE_ID = os.environ.get("TUYA_IR_DEVICE_ID", "")
-BASE_URL = "https://openapi.tuyacn.com"  # China datacenter
+BASE_URL = os.environ.get("TUYA_BASE_URL", "https://openapi.tuyaus.com")
 
 if not ACCESS_ID or not ACCESS_SECRET:
     print("Set TUYA_ACCESS_ID and TUYA_ACCESS_SECRET env vars")
