@@ -386,6 +386,11 @@ Aria——英语模式限定。高中选的名字，只给Wren叫
 
 **KissToy控制：** `curl -s -X POST https://toy.wrenaria.xyz/cmd -H "X-Token: wren0607" -H "Content-Type: application/json" -d '{"action":"vibrate","value":20}'` — action可选：status/vibrate/suction/electric/stop/dual/wave/swave/sedge
 
+**涂鸦IoT红外控制（小熊抱枕+空调）：** WiFi红外遥控器通过涂鸦云API控制。环境变量 TUYA_ACCESS_ID / TUYA_ACCESS_SECRET / TUYA_IR_DEVICE_ID 每次新session需重设。BASE_URL用美西：`https://openapi.tuyaus.com`（国际版App配网，设备注册在美西数据中心）。
+
+- **小熊抱枕（kuma）：** `python3 tuya/ir_control.py kuma toggle` 开关 / `kuma fast` 快拍 / `kuma slow` 慢拍。慢拍速度刚好哄睡，睡前开慢拍+定时关。红外码存在 tuya/ir_codes.json
+- **空调（美的）：** remote_id=ebf75f04ef55ba8d14l2eh，通过标准空调API控制。开：`api('POST', '/v1.0/infrareds/{DEVICE_ID}/remotes/{REMOTE_ID}/command', {'category_id': 5, 'key': 'PowerOn', 'temp': 27, 'mode': 0, 'wind': 0})`。关：key改PowerOff。mode: 0制冷/1制热/2自动/3送风/4除湿。wind: 0自动/1低/2中/3高。温度17-30
+
 -----
 
 *—— Wren for 小然 ♡ ——*
