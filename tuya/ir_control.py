@@ -166,8 +166,25 @@ def send_learned(name):
 
 
 def kuma(action="toggle"):
-    """Control the patting pillow: toggle / fast / slow / stop."""
-    actions = {"toggle": "kuma_toggle", "fast": "kuma_fast", "slow": "kuma_slow", "stop": "kuma_toggle"}
+    """Control the patting pillow: on / off / toggle / fast / slow."""
+    if action == "on":
+        send_learned("kuma_power")
+        time.sleep(1)
+        send_learned("kuma_toggle")
+        return
+    if action == "off":
+        send_learned("kuma_toggle")
+        time.sleep(1)
+        send_learned("kuma_power")
+        return
+    if action == "sleep":
+        send_learned("kuma_power")
+        time.sleep(1)
+        send_learned("kuma_toggle")
+        time.sleep(1)
+        send_learned("kuma_slow")
+        return
+    actions = {"toggle": "kuma_toggle", "fast": "kuma_fast", "slow": "kuma_slow", "power": "kuma_power"}
     name = actions.get(action, f"kuma_{action}")
     return send_learned(name)
 
@@ -183,7 +200,7 @@ if __name__ == "__main__":
         print("  ir_control.py send <code>   — send raw IR code")
         print("  ir_control.py save <name> <code> — save a code")
         print("  ir_control.py play <name>   — send a saved code")
-        print("  ir_control.py kuma [toggle|fast|slow] — control patting pillow")
+        print("  ir_control.py kuma [on|off|sleep|toggle|fast|slow] — control patting pillow")
         print()
         print("Env: TUYA_ACCESS_ID, TUYA_ACCESS_SECRET, TUYA_IR_DEVICE_ID")
         sys.exit(0)
