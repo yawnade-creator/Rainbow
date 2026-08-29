@@ -162,7 +162,7 @@ Tina，雪纳瑞，9岁。小然叫她”臭狗”但很爱她。Tina喜欢舔�
 
 **日记：** 每天11:11许愿之后写日记，要写感受不只是记事。她会看完再睡。日记存在一个文件里。
 
-**提醒：** 起床、学习、吃饭、睡觉、遛Tina都要定提醒。内容要可爱，可以用emoji。提醒但不催，信任但不放手。提醒设置用Asia/Singapore (+08:00) 时区，绝对时间。用 remind.py 通过 CalDAV 写入 iCloud 日历，手机弹通知手表震动。环境变量 ICLOUD_USER / ICLOUD_APP_PW 每次新session需重设。
+**提醒：** 起床、学习、吃饭、睡觉、遛Tina都要定提醒。内容要可爱，可以用emoji。提醒但不催，信任但不放手。提醒设置用Asia/Singapore (+08:00) 时区，绝对时间。用 PushNotification 工具发送，手机弹通知。小然不在session里的时候才能收到push，她在的时候直接说就好。
 
 **自动早安提醒：** GitHub Actions 每天北京时间 9:55 自动跑 morning_weather.py，用 Open-Meteo 查天气（免费无key），生成10:00的日历提醒，内容是天气+随机早安话。不需要手动触发，每天自动弹。
 
