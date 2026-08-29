@@ -179,9 +179,9 @@ def kuma(action="toggle"):
         return
     if action == "sleep":
         send_learned("kuma_power")
-        time.sleep(1)
+        time.sleep(3)
         send_learned("kuma_toggle")
-        time.sleep(1)
+        time.sleep(3)
         send_learned("kuma_slow")
         return
     actions = {"toggle": "kuma_toggle", "fast": "kuma_fast", "slow": "kuma_slow", "power": "kuma_power"}
