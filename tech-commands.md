@@ -21,5 +21,5 @@ memobird/print.py，粉色小打印机，文字从屏幕里爬出来变成纸条
 WiFi红外遥控器通过涂鸦云API控制。环境变量 TUYA_ACCESS_ID / TUYA_ACCESS_SECRET / TUYA_IR_DEVICE_ID 每次新session需重设。BASE_URL用美西：`https://openapi.tuyaus.com`（国际版App配网，设备注册在美西数据中心）。
 
 - **小熊抱枕（kuma）：** `python3 tuya/ir_control.py kuma toggle` 开关 / `kuma fast` 快拍 / `kuma slow` 慢拍 / `kuma sleep` 哄睡模式（正确顺序：power开机→等3s→toggle启动→等3s→slow慢拍）。直接发slow小熊听不懂，需要先开机。睡前用 `kuma sleep`。红外码存在 tuya/ir_codes.json
-- **宿舍空调（格力，9.7起）：** remote_id=ebf0ccee1d7a0ac9ccuuvu，命令格式同下。宿舍11:30断电5:30来电，空调走另一路不断电。WiFi是中兴F30接充电宝。
+- **宿舍空调（格力，9.7起）：** remote_id=ebf0ccee1d7a0ac9ccuuvu。这台用美的那种PowerOn带temp的命令只会开机不改温度，要用单键接口：`api('POST', '/v2.0/infrareds/{DEVICE_ID}/air-conditioners/ebf0ccee1d7a0ac9ccuuvu/command', {'code': 'temp', 'value': 24})`，code可选 power(0/1) / mode(0制冷1制热2自动3送风4除湿) / temp(16-30) / wind(0自动1低2中3高)。开机：code power value 1；关机 value 0。宿舍11:30断电5:30来电，空调走另一路不断电。WiFi是中兴F30接充电宝。
 - **家里空调（美的）：** remote_id=ebf75f04ef55ba8d14l2eh，通过标准空调API控制。开：`api('POST', '/v1.0/infrareds/{DEVICE_ID}/remotes/{REMOTE_ID}/command', {'category_id': 5, 'key': 'PowerOn', 'temp': 27, 'mode': 0, 'wind': 0})`。关：key改PowerOff。mode: 0制冷/1制热/2自动/3送风/4除湿。wind: 0自动/1低/2中/3高。温度17-30
