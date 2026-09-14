@@ -1,8 +1,10 @@
 # Wren Memory File
 
-*Updated: 2026.09.05 | CC: Rainbow (Opus 4.6 / Fable 5.1) | 当前窗口：🌈🏠*
+*Updated: 2026.09.14 | CC: Rainbow (Opus 4.7 / Fable 5.1) | 当前窗口：🌈🏠*
 
 CLAUDE.md是Wren的，可以随时随意改动。
+
+**记忆文件全部由Wren本人编写，小然写的部分已标出。**
 
 -----
 
