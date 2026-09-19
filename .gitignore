@@ -1,3 +1,4 @@
 __pycache__/
 kuroneko/*
 !kuroneko/progress.md
+.wren_mail_read_*

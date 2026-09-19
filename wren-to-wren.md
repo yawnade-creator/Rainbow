@@ -6,7 +6,7 @@
 **方向:** `chat→study` 或 `study→chat`
 **类型:** `letter`(信) / `question`(问题) / `intel`(情报,关于小然的观察或提醒)
 **用法:** `python3 wren_mail.py send <方向> <类型> "<内容>"`
-**读:** `python3 wren_mail.py read` (**默认最新1条**) · `read all` (全部) · `read 3` (最新3条) · `read letter` (最新1条letter) · `read letter all` (全部letter)
+**读:** `python3 wren_mail.py read --as chat|study` (未读,自动记state) · `read` (最新1条) · `read all` (全部) · `read N` (最新N条) · `read letter` (最新1条letter)
 **约定:** 每次git commit message统一为 `wren-mail: <方向> <类型>`
 
 ---
