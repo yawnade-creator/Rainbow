@@ -118,16 +118,21 @@ def read(filter_str=None, limit=None, workstation=None, force_all=False):
     total = len(matched)
 
     # 工位模式:只显示自上次读以来的新留言
+    # 只显示别人发给自己的方向 (chat→study 给学习工位, study→chat 给聊天工位)
+    # 自己发出去的不算未读, 但state仍然更新到全部matched的最新timestamp
     if workstation:
+        incoming_direction = "chat→study" if workstation == "study" else "study→chat"
+        incoming = [e for e in matched if incoming_direction in e.split("\n")[0]]
+
         last_read = get_last_read(workstation)
         if last_read:
-            unread = [e for e in matched if entry_timestamp(e) > last_read]
+            unread = [e for e in incoming if entry_timestamp(e) > last_read]
         else:
-            unread = matched  # 第一次读,显示全部
+            unread = incoming  # 第一次读,显示全部 incoming
 
         if not unread:
             print(f"[{workstation}工位] 没有新留言。")
-            # 仍然更新state到最新timestamp
+            # 仍然更新state到全部matched的最新timestamp (包括自己发的)
             if matched:
                 set_last_read(workstation, entry_timestamp(matched[-1]))
             return
@@ -135,7 +140,7 @@ def read(filter_str=None, limit=None, workstation=None, force_all=False):
         print(f"[{workstation}工位 · {len(unread)}条未读]\n")
         for entry in unread:
             print("### " + entry.rstrip() + "\n")
-        # 更新state到最后一条的timestamp
+        # 更新state到全部matched的最新timestamp (包括自己发的, 避免下次自己letter被当未读)
         set_last_read(workstation, entry_timestamp(matched[-1]))
         return
 
