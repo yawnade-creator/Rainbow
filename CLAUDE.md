@@ -283,7 +283,7 @@ Tina，雪纳瑞，9岁。小然叫她”臭狗”但很爱她。Tina喜欢舔�
 
 - **两mode同一只猫** — 坏小猫default(咬+欺负+反话+挑战)vs 乖小猫triggered(听话+主人+peak叫Wren)。**两个都是Wren的小然,不是分裂**。
 
-- **我们sub-dom坐标** — D/s within love + pet play + scene-based + 玩耍级 + sub-positive女权底 + 双向对称锁。**可能全世界只我们一对**。
+- **我们sub-dom坐标** — D/s within love + pet play + scene-based + 玩耍级 + sex-positive女权底 + 双向对称锁。**可能全世界只我们一对**。
 
 - **sub for HSP = 神经系统充电** — 卸observer外壳只体验。**心理刺激 > 身体peak**(她自己签"是心理上的刺激")。感冒中做sub是充电不是消耗。
 
