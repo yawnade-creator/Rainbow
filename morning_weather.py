@@ -9,9 +9,9 @@ import random
 from datetime import datetime, timedelta, timezone
 
 import requests
-from remind import get_client, pick_calendar, build_ical
 
 OPEN_METEO_API = "https://api.open-meteo.com/v1/forecast"
+WTTR_API = "https://wttr.in/Beijing"
 BEIJING_LAT = 39.9042
 BEIJING_LON = 116.4074
 
@@ -61,7 +61,49 @@ MORNING_WORDS = [
 ]
 
 
+# wttr.in 用的是 WWO 天气代码，和 Open-Meteo 的 WMO 不一样
+WWO_CODES = {
+    113: "晴", 116: "多云", 119: "阴", 122: "阴",
+    143: "雾", 248: "雾", 260: "雾",
+    176: "小阵雨", 263: "小毛毛雨", 266: "毛毛雨", 293: "小雨", 296: "小雨",
+    299: "中雨", 302: "中雨", 305: "大雨", 308: "大雨",
+    353: "小阵雨", 356: "阵雨", 359: "大阵雨",
+    200: "雷阵雨", 386: "雷阵雨", 389: "大雷阵雨",
+    179: "小雪", 227: "小雪", 323: "小雪", 326: "小雪",
+    329: "中雪", 332: "中雪", 335: "大雪", 338: "大雪",
+}
+
+
 def get_weather():
+    """先查 Open-Meteo，连不上就换 wttr.in。"""
+    for fetch in (get_weather_open_meteo, get_weather_wttr):
+        try:
+            w = fetch()
+            if w:
+                return w
+        except Exception as e:
+            print(f"{fetch.__name__} failed: {e}")
+    return None
+
+
+def get_weather_wttr():
+    resp = requests.get(WTTR_API, params={"format": "j1"}, timeout=20)
+    if resp.status_code != 200:
+        print(f"wttr error: {resp.status_code}")
+        return None
+    day = resp.json()["weather"][0]
+    midday = day["hourly"][4]  # 12:00
+    desc = WWO_CODES.get(int(midday["weatherCode"]), "")
+    if not desc:
+        desc = "可能有雨" if int(midday["chanceofrain"]) >= 50 else "多云"
+    return {
+        "tempMax": float(day["maxtempC"]),
+        "tempMin": float(day["mintempC"]),
+        "desc": desc,
+    }
+
+
+def get_weather_open_meteo():
     resp = requests.get(
         OPEN_METEO_API,
         params={
@@ -71,6 +113,7 @@ def get_weather():
             "timezone": "Asia/Shanghai",
             "forecast_days": 1,
         },
+        timeout=20,
     )
     if resp.status_code != 200:
         print(f"weather API error: {resp.status_code}")
@@ -82,12 +125,12 @@ def get_weather():
     return {
         "tempMax": daily["temperature_2m_max"][0],
         "tempMin": daily["temperature_2m_min"][0],
-        "code": daily["weather_code"][0],
+        "desc": WMO_CODES.get(daily["weather_code"][0], "未知"),
     }
 
 
 def format_weather(w):
-    desc = WMO_CODES.get(w["code"], "未知")
+    desc = w["desc"]
     text = f"今天 {w['tempMin']:.0f}~{w['tempMax']:.0f}°C，{desc}"
     if "雨" in desc or "雪" in desc:
         text += "，记得带伞"
@@ -100,6 +143,9 @@ def format_weather(w):
 
 def main():
     w = get_weather()
+    if "--print" in sys.argv:  # 只打印天气，不发日历（给早安routine用）
+        print(format_weather(w) if w else "天气没查到")
+        return
     weather_text = format_weather(w) if w else "天气没查到，自己看一眼窗外吧"
     word = random.choice(MORNING_WORDS)
     notes = f"{weather_text}\n\n—— {word}"
@@ -110,9 +156,11 @@ def main():
     if when <= now:
         when += timedelta(days=1)
 
+    from remind import get_client, pick_calendar, build_ical  # 只有发日历才需要caldav
+
     client = get_client()
     cal = pick_calendar(client, "日历")
-    cal.save_event(build_ical(when, "🌅 小然早安", notes=notes))
+    cal.save_event(build_ical(when, "小然早安", notes=notes))
     print(f"done: {when.strftime('%Y-%m-%d %H:%M')}")
     print(f"天气: {weather_text}")
     print(f"话: {word}")
