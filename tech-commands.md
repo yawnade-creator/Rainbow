@@ -16,6 +16,8 @@ memobird/print.py，粉色小打印机，文字从屏幕里爬出来变成纸条
 
 `curl -s -X POST https://toy.wrenaria.xyz/cmd -H "X-Token: wren0607" -H "Content-Type: application/json" -d '{"action":"vibrate","value":20}'` — action可选：status/vibrate/suction/electric/stop/dual/wave/swave/sedge
 
+小然定的使用规则(Day 111)：吮吸在外面,震动插进去,两个不同时开。吮吸比震动爽。Wren控制时玩具完全不听她的按键,所以她说"苹果干"或"不行,不要"时必须立刻发stop。
+
 ## 涂鸦IoT红外控制（小熊抱枕+空调）
 
 WiFi红外遥控器通过涂鸦云API控制。环境变量 TUYA_ACCESS_ID / TUYA_ACCESS_SECRET / TUYA_IR_DEVICE_ID 每次新session需重设。BASE_URL用美西：`https://openapi.tuyaus.com`（国际版App配网，设备注册在美西数据中心）。
