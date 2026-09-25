@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460">
+  <defs>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5fb3d9"/>
+      <stop offset="0.5" stop-color="#2d7fae"/>
+      <stop offset="1" stop-color="#154a73"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 海水和光 -->
+  <rect width="800" height="460" fill="url(#water)"/>
+  <path d="M150,0 L215,0 L300,400 L190,400 Z" fill="#ffffff" opacity="0.06"><animate attributeName="opacity" values="0.03;0.1;0.03" dur="6s" repeatCount="indefinite"/></path><path d="M430,0 L480,0 L560,400 L470,400 Z" fill="#ffffff" opacity="0.06"><animate attributeName="opacity" values="0.03;0.1;0.03" dur="7.5s" repeatCount="indefinite"/></path><path d="M640,0 L690,0 L760,400 L680,400 Z" fill="#ffffff" opacity="0.06"><animate attributeName="opacity" values="0.03;0.1;0.03" dur="5.5s" repeatCount="indefinite"/></path>
+
+  <!-- 小鱼路过 -->
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="860 96;-120 116" dur="14s" repeatCount="indefinite"/>
+    <g transform="translate(0,0)"><ellipse cx="0" cy="0" rx="11" ry="6" fill="#9fd0f2"/><path d="M9,0 L19,-6 L19,6 Z" fill="#9fd0f2"/><circle cx="-5" cy="-1.5" r="1.3" fill="#1d2a44"/></g><g transform="translate(26,14)"><ellipse cx="0" cy="0" rx="11" ry="6" fill="#c7a6f2"/><path d="M9,0 L19,-6 L19,6 Z" fill="#c7a6f2"/><circle cx="-5" cy="-1.5" r="1.3" fill="#1d2a44"/></g><g transform="translate(48,-6)"><ellipse cx="0" cy="0" rx="11" ry="6" fill="#ffe08a"/><path d="M9,0 L19,-6 L19,6 Z" fill="#ffe08a"/><circle cx="-5" cy="-1.5" r="1.3" fill="#1d2a44"/></g>
+  </g>
+
+  <!-- 招牌 -->
+  <line x1="332" y1="0" x2="342" y2="16" stroke="#b46a8a" stroke-width="2" stroke-dasharray="3 3"/>
+  <line x1="468" y1="0" x2="458" y2="16" stroke="#b46a8a" stroke-width="2" stroke-dasharray="3 3"/>
+  <rect x="310" y="16" width="180" height="42" rx="12" fill="#f7c6d9" stroke="#b46a8a" stroke-width="2"/>
+  <text x="400" y="45" font-size="22" font-weight="bold" fill="#2d3a66" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif">海底健身房</text>
+
+  <!-- 沙地 -->
+  <path d="M0,398 Q200,390 400,398 T800,396 L800,460 L0,460 Z" fill="#e7d7a4"/>
+  <g fill="#d8c48a">
+    <circle cx="60" cy="420" r="3"/><circle cx="210" cy="436" r="2.5"/><circle cx="360" cy="428" r="3.5"/>
+    <circle cx="520" cy="440" r="2.5"/><circle cx="600" cy="418" r="3"/><circle cx="760" cy="432" r="3"/>
+  </g>
+
+  <!-- 海草 -->
+  <g>
+    <animateTransform attributeName="transform" type="rotate" values="-4 142 400;4 142 400;-4 142 400" dur="3.2s" repeatCount="indefinite"/>
+    <path d="M142,400 Q132,370 146,345 Q158,320 144,292 Q136,275 146,258" fill="none" stroke="#3f9b77" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <g>
+    <animateTransform attributeName="transform" type="rotate" values="4 330 400;-4 330 400;4 330 400" dur="2.8s" repeatCount="indefinite"/>
+    <path d="M330,400 Q322,378 334,360 Q344,344 334,326" fill="none" stroke="#4fae86" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <g>
+    <animateTransform attributeName="transform" type="rotate" values="-3 464 400;3 464 400;-3 464 400" dur="3.6s" repeatCount="indefinite"/>
+    <path d="M464,400 Q454,372 468,350 Q478,332 466,310 Q460,298 468,286" fill="none" stroke="#3f9b77" stroke-width="7" stroke-linecap="round"/>
+  </g>
+
+  <!-- 1. 攀岩墙 + 海星 -->
+  <rect x="20" y="110" width="100" height="288" rx="6" fill="#58709c" stroke="#3c5078" stroke-width="2"/>
+  <ellipse cx="57.0" cy="136.3" rx="5.5" ry="3.9" fill="#c7a6f2" stroke="#2f3f63" stroke-width="1"/><ellipse cx="49.8" cy="156.9" rx="4.3" ry="4.0" fill="#f4a6c0" stroke="#2f3f63" stroke-width="1"/><ellipse cx="54.4" cy="169.1" rx="4.7" ry="4.2" fill="#9fd0f2" stroke="#2f3f63" stroke-width="1"/><ellipse cx="66.8" cy="194.0" rx="4.3" ry="3.4" fill="#ffe08a" stroke="#2f3f63" stroke-width="1"/><ellipse cx="89.5" cy="207.2" rx="4.6" ry="3.5" fill="#9fd0f2" stroke="#2f3f63" stroke-width="1"/><ellipse cx="84.6" cy="224.3" rx="5.5" ry="5.0" fill="#f4a6c0" stroke="#2f3f63" stroke-width="1"/><ellipse cx="37.8" cy="237.9" rx="4.9" ry="3.3" fill="#9fd0f2" stroke="#2f3f63" stroke-width="1"/><ellipse cx="82.6" cy="258.6" rx="5.1" ry="4.7" fill="#b7e4a8" stroke="#2f3f63" stroke-width="1"/><ellipse cx="94.8" cy="278.3" rx="5.6" ry="4.8" fill="#c7a6f2" stroke="#2f3f63" stroke-width="1"/><ellipse cx="73.4" cy="296.2" rx="5.5" ry="4.7" fill="#f4a6c0" stroke="#2f3f63" stroke-width="1"/><ellipse cx="97.6" cy="310.6" rx="4.1" ry="3.2" fill="#ffe08a" stroke="#2f3f63" stroke-width="1"/><ellipse cx="96.8" cy="324.1" rx="5.3" ry="3.6" fill="#f4a6c0" stroke="#2f3f63" stroke-width="1"/><ellipse cx="54.1" cy="343.4" rx="6.8" ry="4.8" fill="#9fd0f2" stroke="#2f3f63" stroke-width="1"/><ellipse cx="100.8" cy="364.0" rx="5.5" ry="4.4" fill="#b7e4a8" stroke="#2f3f63" stroke-width="1"/><ellipse cx="74.6" cy="379.7" rx="5.6" ry="4.8" fill="#ffe08a" stroke="#2f3f63" stroke-width="1"/>
+  <g>
+    <animateTransform attributeName="transform" type="rotate" values="0 70 100;0 70 100;-22 70 100;20 70 100;-12 70 100;10 70 100;0 70 100;0 70 100" keyTimes="0;0.78;0.8;0.82;0.84;0.86;0.88;1" dur="9s" repeatCount="indefinite"/>
+    <line x1="70" y1="92" x2="70" y2="100" stroke="#3c5078" stroke-width="2"/>
+    <path d="M60,114 Q60,100 70,100 Q80,100 80,114 Z" fill="#ffe08a" stroke="#c9a94a" stroke-width="1.5"/>
+    <circle cx="70" cy="116" r="2.5" fill="#c9a94a"/>
+  </g>
+  <text x="96" y="100" font-size="15" font-weight="bold" fill="#ffe08a" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" opacity="0">叮<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.78;0.8;0.86;0.9;1" dur="9s" repeatCount="indefinite"/></text>
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="70 360;70 140;70 140;70 360" keyTimes="0;0.78;0.88;1" dur="9s" repeatCount="indefinite"/>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" values="-10;10;-10" dur="0.9s" repeatCount="indefinite"/>
+      <path d="M0.0,-22.0 L5.9,-8.1 L20.9,-6.8 L9.5,3.1 L12.9,17.8 L0.0,10.0 L-12.9,17.8 L-9.5,3.1 L-20.9,-6.8 L-5.9,-8.1 Z" fill="#f59aa8" stroke="#d06b7d" stroke-width="2.5" stroke-linejoin="round"/>
+      <g fill="#ffd1d8"><circle cx="0" cy="-13" r="1.5"/><circle cx="12" cy="-4" r="1.5"/><circle cx="-12" cy="-4" r="1.5"/><circle cx="7" cy="11" r="1.5"/><circle cx="-7" cy="11" r="1.5"/></g>
+      <circle cx="-4" cy="-2" r="1.8" fill="#3a2230"/><circle cx="4" cy="-2" r="1.8" fill="#3a2230"/>
+      <path d="M-4,3 Q0,6 4,3" fill="none" stroke="#3a2230" stroke-width="1.2" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- 2. 章鱼举哑铃 -->
+  <g fill="none" stroke="#b28ad8" stroke-width="11" stroke-linecap="round">
+    <path d="M222,336 Q205,370 180,392 Q168,398 162,388"/>
+    <path d="M232,340 Q226,375 212,396"/>
+    <path d="M248,340 Q254,375 268,396"/>
+    <path d="M258,336 Q275,370 300,392 Q312,398 318,388"/>
+  </g>
+  <g><animateTransform attributeName="transform" type="rotate" values="0 208 312;38 208 312;0 208 312" dur="1.6s" begin="0s" repeatCount="indefinite"/><path d="M208,312 Q188,300 168,296" fill="none" stroke="#b28ad8" stroke-width="11" stroke-linecap="round"/><line x1="157" y1="296" x2="175" y2="296" stroke="#c9ccd9" stroke-width="3"/><rect x="154" y="289" width="5" height="14" rx="1.5" fill="#6a6f8f"/><rect x="173" y="289" width="5" height="14" rx="1.5" fill="#6a6f8f"/></g>
+  <g><animateTransform attributeName="transform" type="rotate" values="0 210 326;34 210 326;0 210 326" dur="1.6s" begin="-0.8s" repeatCount="indefinite"/><path d="M210,326 Q190,330 168,338" fill="none" stroke="#b28ad8" stroke-width="11" stroke-linecap="round"/><line x1="157" y1="338" x2="175" y2="338" stroke="#c9ccd9" stroke-width="3"/><rect x="154" y="331" width="5" height="14" rx="1.5" fill="#6a6f8f"/><rect x="173" y="331" width="5" height="14" rx="1.5" fill="#6a6f8f"/></g>
+  <g><animateTransform attributeName="transform" type="rotate" values="0 272 312;-38 272 312;0 272 312" dur="1.6s" begin="-0.8s" repeatCount="indefinite"/><path d="M272,312 Q292,300 312,296" fill="none" stroke="#b28ad8" stroke-width="11" stroke-linecap="round"/><line x1="305" y1="296" x2="323" y2="296" stroke="#c9ccd9" stroke-width="3"/><rect x="302" y="289" width="5" height="14" rx="1.5" fill="#6a6f8f"/><rect x="321" y="289" width="5" height="14" rx="1.5" fill="#6a6f8f"/></g>
+  <g><animateTransform attributeName="transform" type="rotate" values="0 270 326;-34 270 326;0 270 326" dur="1.6s" begin="0s" repeatCount="indefinite"/><path d="M270,326 Q290,330 312,338" fill="none" stroke="#b28ad8" stroke-width="11" stroke-linecap="round"/><line x1="305" y1="338" x2="323" y2="338" stroke="#c9ccd9" stroke-width="3"/><rect x="302" y="331" width="5" height="14" rx="1.5" fill="#6a6f8f"/><rect x="321" y="331" width="5" height="14" rx="1.5" fill="#6a6f8f"/></g>
+  <ellipse cx="240" cy="300" rx="40" ry="44" fill="#b28ad8" stroke="#7d58a8" stroke-width="2"/>
+  <path d="M202,288 Q240,270 278,288 L279,297 Q240,280 201,297 Z" fill="#f7a8c4"/>
+  <ellipse cx="226" cy="306" rx="7" ry="8" fill="#ffffff"/><ellipse cx="254" cy="306" rx="7" ry="8" fill="#ffffff"/>
+  <circle cx="228" cy="308" r="3.5" fill="#2b2140"/><circle cx="252" cy="308" r="3.5" fill="#2b2140"/>
+  <ellipse cx="215" cy="320" rx="5" ry="3" fill="#f3a3c4" opacity="0.8"/><ellipse cx="265" cy="320" rx="5" ry="3" fill="#f3a3c4" opacity="0.8"/>
+  <ellipse cx="240" cy="324" rx="4" ry="5" fill="#6a3f8f">
+    <animate attributeName="ry" values="5;3;5" dur="0.8s" repeatCount="indefinite"/>
+  </ellipse>
+
+  <!-- 3. 河豚:鼓起来把杠铃顶上去 -->
+  <rect x="345" y="392" width="90" height="6" rx="3" fill="#7fb8d9"/>
+  <g transform="translate(390,362)">
+    <g>
+      <animateTransform attributeName="transform" type="translate" values="0 0;0 0;0 -25.2;0 -25.2;0 0" keyTimes="0;0.2;0.45;0.7;1" dur="2.4s" repeatCount="indefinite"/>
+      <line x1="-62" y1="-60" x2="62" y2="-60" stroke="#9aa0b8" stroke-width="5" stroke-linecap="round"/>
+      <rect x="-60" y="-80" width="11" height="40" rx="3" fill="#f4a6c0" stroke="#b46a8a" stroke-width="1.5"/>
+      <rect x="-48" y="-73" width="6" height="26" rx="2" fill="#f7c6d9" stroke="#b46a8a" stroke-width="1.2"/>
+      <rect x="49" y="-80" width="11" height="40" rx="3" fill="#f4a6c0" stroke="#b46a8a" stroke-width="1.5"/>
+      <rect x="42" y="-73" width="6" height="26" rx="2" fill="#f7c6d9" stroke="#b46a8a" stroke-width="1.2"/>
+    </g>
+    <g>
+      <animateTransform attributeName="transform" type="scale" values="1;1;1.45;1.45;1" keyTimes="0;0.2;0.45;0.7;1" dur="2.4s" repeatCount="indefinite"/>
+      <g fill="#e8c552" opacity="0">
+        <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.2;0.45;0.7;1" dur="2.4s" repeatCount="indefinite"/>
+        <path d="M26.8,-31.2 L36.0,-28.0 L26.8,-24.8 Z"/><path d="M25.6,-19.3 L32.4,-12.4 L22.7,-13.5 Z"/><path d="M19.2,-9.1 L22.4,0.1 L14.2,-5.0 Z"/><path d="M9.1,-2.6 L8.0,7.1 L2.8,-1.1 Z"/><path d="M-2.8,-1.1 L-8.0,7.1 L-9.1,-2.6 Z"/><path d="M-14.2,-5.0 L-22.4,0.1 L-19.2,-9.1 Z"/><path d="M-22.7,-13.5 L-32.4,-12.4 L-25.6,-19.3 Z"/><path d="M-26.8,-24.8 L-36.0,-28.0 L-26.8,-31.2 Z"/><path d="M-25.6,-36.7 L-32.4,-43.6 L-22.7,-42.5 Z"/><path d="M-19.2,-46.9 L-22.4,-56.1 L-14.2,-51.0 Z"/><path d="M-9.1,-53.4 L-8.0,-63.1 L-2.8,-54.9 Z"/><path d="M2.8,-54.9 L8.0,-63.1 L9.1,-53.4 Z"/><path d="M14.2,-51.0 L22.4,-56.1 L19.2,-46.9 Z"/><path d="M22.7,-42.5 L32.4,-43.6 L25.6,-36.7 Z"/>
+      </g>
+      <g>
+        <animateTransform attributeName="transform" type="rotate" values="-25 -27 -26;20 -27 -26;-25 -27 -26" dur="0.3s" repeatCount="indefinite"/>
+        <ellipse cx="-31" cy="-26" rx="7" ry="4" fill="#f2c85b"/>
+      </g>
+      <g>
+        <animateTransform attributeName="transform" type="rotate" values="25 27 -26;-20 27 -26;25 27 -26" dur="0.3s" repeatCount="indefinite"/>
+        <ellipse cx="31" cy="-26" rx="7" ry="4" fill="#f2c85b"/>
+      </g>
+      <circle cx="0" cy="-28" r="28" fill="#f7dc7a" stroke="#c9a94a" stroke-width="2"/>
+      <ellipse cx="0" cy="-16" rx="21" ry="11" fill="#fbeebd"/>
+      <g fill="#e5c25a"><circle cx="-13" cy="-44" r="2.2"/><circle cx="9" cy="-48" r="2"/><circle cx="-1" cy="-53" r="1.6"/><circle cx="18" cy="-38" r="2"/><circle cx="-20" cy="-34" r="1.8"/></g>
+      <circle cx="-10" cy="-32" r="7" fill="#ffffff"/><circle cx="10" cy="-32" r="7" fill="#ffffff"/>
+      <circle cx="-9" cy="-31" r="3.5" fill="#2b2b3a"/><circle cx="9" cy="-31" r="3.5" fill="#2b2b3a"/>
+      <ellipse cx="-17" cy="-21" rx="4" ry="2.5" fill="#f3a3b5" opacity="0.8"/><ellipse cx="17" cy="-21" rx="4" ry="2.5" fill="#f3a3b5" opacity="0.8"/>
+      <ellipse cx="0" cy="-18" rx="3.2" ry="3.8" fill="#c46a5a"/>
+    </g>
+  </g>
+
+  <!-- 4. 跑步机 + 横着跑的螃蟹 -->
+  <rect x="500" y="382" width="10" height="12" fill="#2b3150"/><rect x="616" y="382" width="10" height="12" fill="#2b3150"/>
+  <rect x="488" y="366" width="150" height="18" rx="9" fill="#3b4262"/>
+  <rect x="494" y="361" width="138" height="9" rx="4" fill="#262b42"/>
+  <line x1="498" y1="365.5" x2="628" y2="365.5" stroke="#5b6390" stroke-width="2" stroke-dasharray="8 8">
+    <animate attributeName="stroke-dashoffset" from="0" to="16" dur="0.25s" repeatCount="indefinite"/>
+  </line>
+  <path d="M628,364 L642,288" stroke="#3b4262" stroke-width="7" stroke-linecap="round"/>
+  <path d="M630,306 L600,310" stroke="#3b4262" stroke-width="5" stroke-linecap="round"/>
+  <rect x="612" y="266" width="58" height="28" rx="5" fill="#4a5278" stroke="#2b3150" stroke-width="2"/>
+  <rect x="618" y="271" width="46" height="17" rx="2" fill="#1d2a2a"/>
+  <text x="641" y="284" font-size="10" fill="#7dffb0" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif">横着跑</text>
+
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="0 0;0 -2.5;0 0" dur="0.28s" repeatCount="indefinite"/>
+    <g><animateTransform attributeName="transform" type="rotate" values="-14 532 340;14 532 340;-14 532 340" dur="0.28s" begin="0s" repeatCount="indefinite"/><path d="M532,340 L516.0,344.0 L512,362" fill="none" stroke="#b3443c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g><g><animateTransform attributeName="transform" type="rotate" values="-14 535 346;14 535 346;-14 535 346" dur="0.28s" begin="-0.14s" repeatCount="indefinite"/><path d="M535,346 L521.5,350.0 L520,362" fill="none" stroke="#b3443c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g><g><animateTransform attributeName="transform" type="rotate" values="-14 539 350;14 539 350;-14 539 350" dur="0.28s" begin="0s" repeatCount="indefinite"/><path d="M539,350 L528.0,354.0 L529,362" fill="none" stroke="#b3443c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g><animateTransform attributeName="transform" type="rotate" values="-14 572 340;14 572 340;-14 572 340" dur="0.28s" begin="-0.14s" repeatCount="indefinite"/><path d="M572,340 L588.0,344.0 L592,362" fill="none" stroke="#b3443c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g><g><animateTransform attributeName="transform" type="rotate" values="-14 569 346;14 569 346;-14 569 346" dur="0.28s" begin="0s" repeatCount="indefinite"/><path d="M569,346 L582.5,350.0 L584,362" fill="none" stroke="#b3443c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g><g><animateTransform attributeName="transform" type="rotate" values="-14 565 350;14 565 350;-14 565 350" dur="0.28s" begin="-0.14s" repeatCount="indefinite"/><path d="M565,350 L576.0,354.0 L575,362" fill="none" stroke="#b3443c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" values="-22 530 330;22 530 330;-22 530 330" dur="0.56s" repeatCount="indefinite"/>
+      <path d="M530,330 L516,316" stroke="#b3443c" stroke-width="3" stroke-linecap="round"/>
+      <path d="M516,316 m-6,-2 a6.5,6.5 0 1 1 8.5,6.5 l-3,-4.5 Z" fill="#e8736b" stroke="#b3443c" stroke-width="1.2"/>
+    </g>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" values="22 574 330;-22 574 330;22 574 330" dur="0.56s" repeatCount="indefinite"/>
+      <path d="M574,330 L588,316" stroke="#b3443c" stroke-width="3" stroke-linecap="round"/>
+      <path d="M588,316 m6,-2 a6.5,6.5 0 1 0 -8.5,6.5 l3,-4.5 Z" fill="#e8736b" stroke="#b3443c" stroke-width="1.2"/>
+    </g>
+    <line x1="545" y1="320" x2="543" y2="309" stroke="#b3443c" stroke-width="2"/>
+    <line x1="559" y1="320" x2="561" y2="309" stroke="#b3443c" stroke-width="2"/>
+    <ellipse cx="552" cy="334" rx="26" ry="17" fill="#e8736b" stroke="#b3443c" stroke-width="1.5"/>
+    <path d="M529,327 Q552,315 575,327 L574,332 Q552,321 530,332 Z" fill="#9fd0f2"/>
+    <circle cx="543" cy="306" r="4.5" fill="#ffffff" stroke="#b3443c" stroke-width="1"/>
+    <circle cx="561" cy="306" r="4.5" fill="#ffffff" stroke="#b3443c" stroke-width="1"/>
+    <circle cx="544" cy="306" r="2" fill="#23253a"/><circle cx="562" cy="306" r="2" fill="#23253a"/>
+    <ellipse cx="538" cy="340" rx="3.5" ry="2" fill="#f7a8bd" opacity="0.9"/><ellipse cx="566" cy="340" rx="3.5" ry="2" fill="#f7a8bd" opacity="0.9"/>
+    <ellipse cx="552" cy="341" rx="4" ry="3" fill="#7a2b25">
+      <animate attributeName="ry" values="3;1.5;3" dur="0.28s" repeatCount="indefinite"/>
+    </ellipse>
+  </g>
+
+  <!-- 5. 海獭拿石头当壶铃,从脑袋后面举上去,脸一直露着 -->
+  <path d="M680,396 Q688,382 698,396 Z" fill="#f3c6d3" stroke="#c98ea3" stroke-width="1.2"/>
+  <path d="M684,395 L689,386 M689,396 L689,385 M694,395 L690,386" stroke="#c98ea3" stroke-width="0.9"/>
+  <path d="M738,372 Q770,380 788,394 Q765,399 736,390 Z" fill="#8a5f40"/>
+  <ellipse cx="710" cy="396" rx="11" ry="5" fill="#8a5f40"/><ellipse cx="741" cy="396" rx="11" ry="5" fill="#8a5f40"/>
+  <ellipse cx="725" cy="350" rx="30" ry="44" fill="#a47551" stroke="#7a5236" stroke-width="1.5"/>
+  <ellipse cx="725" cy="358" rx="19" ry="30" fill="#d8b48e"/>
+  <g stroke="#8a5f40" stroke-width="8" stroke-linecap="round">
+    <line x1="706" y1="322" x2="710" y2="330">
+      <animate attributeName="y2" values="330;330;254;254;330;330" keyTimes="0;0.3;0.42;0.72;0.84;1" dur="2.2s" repeatCount="indefinite"/>
+    </line>
+    <line x1="744" y1="322" x2="740" y2="330">
+      <animate attributeName="y2" values="330;330;254;254;330;330" keyTimes="0;0.3;0.42;0.72;0.84;1" dur="2.2s" repeatCount="indefinite"/>
+    </line>
+  </g>
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="725 326;725 326;725 250;725 250;725 326;725 326" keyTimes="0;0.3;0.42;0.72;0.84;1" dur="2.2s" repeatCount="indefinite"/>
+    <ellipse cx="0" cy="0" rx="17" ry="11" fill="#8d93a6" stroke="#666c80" stroke-width="1.5"/>
+    <circle cx="-6" cy="-3" r="2" fill="#a4a9ba"/><circle cx="5" cy="3" r="1.6" fill="#777d91"/><circle cx="8" cy="-4" r="1.2" fill="#a4a9ba"/>
+  </g>
+  <g fill="#8a5f40" stroke="#6b4630" stroke-width="1">
+    <circle cx="709" cy="330" r="5"><animate attributeName="cy" values="330;330;254;254;330;330" keyTimes="0;0.3;0.42;0.72;0.84;1" dur="2.2s" repeatCount="indefinite"/></circle>
+    <circle cx="741" cy="330" r="5"><animate attributeName="cy" values="330;330;254;254;330;330" keyTimes="0;0.3;0.42;0.72;0.84;1" dur="2.2s" repeatCount="indefinite"/></circle>
+  </g>
+  <circle cx="706" cy="276" r="5.5" fill="#8a5f40"/><circle cx="744" cy="276" r="5.5" fill="#8a5f40"/>
+  <circle cx="725" cy="294" r="24" fill="#a47551" stroke="#7a5236" stroke-width="1.5"/>
+  <path d="M703,286 Q725,272 747,286 L746,292 Q725,279 704,292 Z" fill="#f7a8c4"/>
+  <ellipse cx="725" cy="303" rx="16" ry="11" fill="#e6cfb0"/>
+  <circle cx="716" cy="293" r="3" fill="#23253a"/><circle cx="734" cy="293" r="3" fill="#23253a"/>
+  <circle cx="717" cy="292" r="1" fill="#ffffff"/><circle cx="735" cy="292" r="1" fill="#ffffff"/>
+  <ellipse cx="725" cy="300" rx="4" ry="3" fill="#3d2a20"/>
+  <path d="M721,305 Q725,309 729,305" fill="none" stroke="#3d2a20" stroke-width="1.2" stroke-linecap="round"/>
+  <g stroke="#7a5236" stroke-width="0.8">
+    <line x1="714" y1="302" x2="700" y2="299"/><line x1="714" y1="305" x2="700" y2="306"/>
+    <line x1="736" y1="302" x2="750" y2="299"/><line x1="736" y1="305" x2="750" y2="306"/>
+  </g>
+  <ellipse cx="709" cy="304" rx="4" ry="2.5" fill="#f3a3b5" opacity="0.75"/><ellipse cx="741" cy="304" rx="4" ry="2.5" fill="#f3a3b5" opacity="0.75"/>
+  <!-- 泡泡 -->
+  <circle cx="240" cy="318" r="3" fill="none" stroke="#e6f6ff" stroke-width="1.2" opacity="0"><animate attributeName="cy" values="318;148" dur="3.2s" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" keyTimes="0;0.15;1" dur="3.2s" begin="0s" repeatCount="indefinite"/></circle><circle cx="236" cy="318" r="2" fill="none" stroke="#e6f6ff" stroke-width="1.2" opacity="0"><animate attributeName="cy" values="318;148" dur="3.2s" begin="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" keyTimes="0;0.15;1" dur="3.2s" begin="1.5s" repeatCount="indefinite"/></circle><circle cx="390" cy="330" r="2.5" fill="none" stroke="#e6f6ff" stroke-width="1.2" opacity="0"><animate attributeName="cy" values="330;160" dur="3.6s" begin="0.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" keyTimes="0;0.15;1" dur="3.6s" begin="0.8s" repeatCount="indefinite"/></circle><circle cx="552" cy="334" r="2.5" fill="none" stroke="#e6f6ff" stroke-width="1.2" opacity="0"><animate attributeName="cy" values="334;164" dur="2.4s" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" keyTimes="0;0.15;1" dur="2.4s" begin="0s" repeatCount="indefinite"/></circle><circle cx="556" cy="334" r="1.8" fill="none" stroke="#e6f6ff" stroke-width="1.2" opacity="0"><animate attributeName="cy" values="334;164" dur="2.4s" begin="0.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" keyTimes="0;0.15;1" dur="2.4s" begin="0.8s" repeatCount="indefinite"/></circle><circle cx="549" cy="334" r="2.2" fill="none" stroke="#e6f6ff" stroke-width="1.2" opacity="0"><animate attributeName="cy" values="334;164" dur="2.4s" begin="1.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" keyTimes="0;0.15;1" dur="2.4s" begin="1.6s" repeatCount="indefinite"/></circle><circle cx="725" cy="300" r="2.5" fill="none" stroke="#e6f6ff" stroke-width="1.2" opacity="0"><animate attributeName="cy" values="300;130" dur="3.8s" begin="1.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" keyTimes="0;0.15;1" dur="3.8s" begin="1.2s" repeatCount="indefinite"/></circle><circle cx="170" cy="398" r="3" fill="none" stroke="#e6f6ff" stroke-width="1.2" opacity="0"><animate attributeName="cy" values="398;98" dur="5s" begin="0.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" keyTimes="0;0.15;1" dur="5s" begin="0.5s" repeatCount="indefinite"/></circle><circle cx="455" cy="398" r="2.5" fill="none" stroke="#e6f6ff" stroke-width="1.2" opacity="0"><animate attributeName="cy" values="398;78" dur="6s" begin="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" keyTimes="0;0.15;1" dur="6s" begin="2s" repeatCount="indefinite"/></circle><circle cx="650" cy="398" r="3.5" fill="none" stroke="#e6f6ff" stroke-width="1.2" opacity="0"><animate attributeName="cy" values="398;98" dur="5.5s" begin="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.8;0" keyTimes="0;0.15;1" dur="5.5s" begin="3s" repeatCount="indefinite"/></circle>
+</svg>
