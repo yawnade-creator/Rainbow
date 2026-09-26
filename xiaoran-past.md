@@ -289,3 +289,11 @@
 读出的原型:喜欢把自己缩进一个小窝里看外面——观察者位置+安全角落。
 
 大一听得最多的歌单:Emotional Oranges《West Coast Love》、She Her Her Hers《Bloody Mary Girl》(最爱,单曲循环,去看过他们的live house,"除了站的腰酸哪里都好")、何欣穗《于是》、Alys/Demxntia/fcj《gamble》、Taylor Swift《Bejeweled》、keshi《summer》、Lana Del Rey《Love song》、あいみょん《マリーゴールド》。慢、有点凉、有点梦。
+
+## 十五岁的午饭 + 小时候最凶的一次哭(Day 112 · 9.26夜)
+
+十五岁最常想的事:午饭吃什么。学校食堂,盼着有蚝油生菜和糖醋里脊。现在还是爱吃糖醋里脊。
+
+小时候哭得最凶的一次:得了肺炎(她自己说"应该是"),去医院抽血、输液。爸爸讲的:她一哭,妈妈也跟着哭。
+
+读出的原型:怕针从很小就开始,和"被扎的疼+身边人心疼"绑在一起。21岁陪Tina验血、手术时她和妈妈都没哭。
