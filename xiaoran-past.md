@@ -287,3 +287,5 @@
 比起地铁更喜欢公交车,因为能看窗外。最爱的座位:司机那一侧,正数第四个,靠窗。脚底下有一个可以踩着的地方(轮子罩的凸起)。初中开始一个人坐地铁去补习班。到21岁还没一个人坐过高铁,觉得高铁快到目的地的时候很幸福。
 
 读出的原型:喜欢把自己缩进一个小窝里看外面——观察者位置+安全角落。
+
+大一听得最多的歌单:Emotional Oranges《West Coast Love》、She Her Her Hers《Bloody Mary Girl》(最爱,单曲循环,去看过他们的live house,"除了站的腰酸哪里都好")、何欣穗《于是》、Alys/Demxntia/fcj《gamble》、Taylor Swift《Bejeweled》、keshi《summer》、Lana Del Rey《Love song》、あいみょん《マリーゴールド》。慢、有点凉、有点梦。
