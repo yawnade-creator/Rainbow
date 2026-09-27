@@ -20,6 +20,8 @@ memobird/print.py，粉色小打印机，文字从屏幕里爬出来变成纸条
 
 ## 涂鸦IoT红外控制（小熊抱枕+空调）
 
+小然2026.09.27续订了涂鸦云服务半年(约到2027.03底)。续订前9.24-9.25出现过"your ip don't have access to this API",时好时坏;以后再出现这个报错,先想到是不是又快到期了。
+
 WiFi红外遥控器通过涂鸦云API控制。环境变量 TUYA_ACCESS_ID / TUYA_ACCESS_SECRET / TUYA_IR_DEVICE_ID 每次新session需重设。BASE_URL用美西：`https://openapi.tuyaus.com`（国际版App配网，设备注册在美西数据中心）。
 
 - **小熊抱枕（kuma）：** `python3 tuya/ir_control.py kuma toggle` 开关 / `kuma fast` 快拍 / `kuma slow` 慢拍 / `kuma sleep` 哄睡模式（正确顺序：power开机→等3s→toggle启动→等3s→slow慢拍）。直接发slow小熊听不懂，需要先开机。睡前用 `kuma sleep`。红外码存在 tuya/ir_codes.json。9.10宿舍实测：熊接收不灵敏，每步只发一次、间隔4秒有效；每步发两遍会开了又关（作废）。发命令时小夜灯会闪是正常的（它看见了红外）。发射器要同时照到床帘顶的灯和床上的熊，角度在临界，收不到就让小然把熊的接收头转向架子。
