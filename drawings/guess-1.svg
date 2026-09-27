@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="#F3EEF6"/>
+  <!-- 小毯子 -->
+  <rect x="40" y="200" width="320" height="70" rx="18" fill="#E7B8C8"/>
+  <path d="M60,215 h280 M60,235 h280 M60,255 h280" stroke="#F6D9E3" stroke-width="4"/>
+  <!-- 身体，趴着 -->
+  <ellipse cx="235" cy="195" rx="95" ry="40" fill="#9A9AA2"/>
+  <!-- 肚子上的纱布 -->
+  <rect x="200" y="200" width="60" height="22" rx="6" fill="#FFFFFF" stroke="#D6D6DC" stroke-width="2"/>
+  <path d="M215,211 h30 M230,204 v14" stroke="#E27A9A" stroke-width="3"/>
+  <!-- 尾巴 -->
+  <path d="M325,180 q20,-25 10,-40" stroke="#9A9AA2" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- 前爪 -->
+  <ellipse cx="120" cy="228" rx="26" ry="11" fill="#B4B4BC"/>
+  <ellipse cx="150" cy="232" rx="24" ry="10" fill="#B4B4BC"/>
+  <!-- 头 -->
+  <rect x="80" y="130" width="85" height="75" rx="26" fill="#A6A6AE"/>
+  <!-- 耷拉的耳朵 -->
+  <path d="M85,138 q-18,5 -10,35 q10,-5 18,-20 z" fill="#7C7C84"/>
+  <path d="M160,138 q18,5 10,35 q-10,-5 -18,-20 z" fill="#7C7C84"/>
+  <!-- 大眉毛 -->
+  <path d="M95,158 q12,-10 24,0" stroke="#EDEDF0" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M127,158 q12,-10 24,0" stroke="#EDEDF0" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <!-- 闭着的眼睛 -->
+  <path d="M100,168 q7,5 14,0 M132,168 q7,5 14,0" stroke="#3A3A40" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- 大胡子 -->
+  <path d="M92,178 q30,45 62,0 q-10,22 -31,26 q-21,-4 -31,-26 z" fill="#EDEDF0"/>
+  <ellipse cx="123" cy="180" rx="8" ry="6" fill="#2E2E34"/>
+  <!-- 伊丽莎白圈 -->
+  <path d="M60,120 L185,120 L165,210 L80,210 Z" fill="#CFE7F2" opacity="0.55" stroke="#9DC7DA" stroke-width="3"/>
+  <!-- 一颗心 -->
+  <path d="M300,110 c-7,-10 -22,-2 -14,10 l14,14 l14,-14 c8,-12 -7,-20 -14,-10 z" fill="#E27A9A"/>
+</svg>
