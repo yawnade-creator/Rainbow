@@ -9,6 +9,7 @@
 
     python3 wren_mail.py read --as chat     # 未读的所有留言(自动更新已读state)
     python3 wren_mail.py read --as study    # 同上,当学习工位
+    python3 wren_mail.py read --as study 2  # 压缩后用: 最新2封来信,不管读没读过(不更新state)
 
     python3 wren_mail.py read all           # 全部(不更新state)
     python3 wren_mail.py read 3             # 最新3条(不更新state)
@@ -124,11 +125,25 @@ def read(filter_str=None, limit=None, workstation=None, force_all=False):
         incoming_direction = "chat→study" if workstation == "study" else "study→chat"
         incoming = [e for e in matched if incoming_direction in e.split("\n")[0]]
 
+        # 带数字(压缩后小然说读几封): 最新N封来信, 不管读没读过, 不动state
+        if limit is not None:
+            shown = incoming[-limit:]
+            if not shown:
+                print(f"[{workstation}工位] 还没有来信。")
+                return
+            print(f"[{workstation}工位 · 最新{len(shown)}封来信]\n")
+            for entry in shown:
+                print("### " + entry.rstrip() + "\n")
+            return
+
         last_read = get_last_read(workstation)
+        header = None
         if last_read:
             unread = [e for e in incoming if entry_timestamp(e) > last_read]
         else:
-            unread = incoming  # 第一次读,显示全部 incoming
+            # 没有已读记录(容器重置state丢了): 只给最新3封, 免得把全部历史倒出来
+            unread = incoming[-3:]
+            header = f"[{workstation}工位 · 没有已读记录, 只显示最新{len(unread)}封 · `read {incoming_direction} all` 看全部]"
 
         if not unread:
             print(f"[{workstation}工位] 没有新留言。")
@@ -137,7 +152,7 @@ def read(filter_str=None, limit=None, workstation=None, force_all=False):
                 set_last_read(workstation, entry_timestamp(matched[-1]))
             return
 
-        print(f"[{workstation}工位 · {len(unread)}条未读]\n")
+        print((header or f"[{workstation}工位 · {len(unread)}条未读]") + "\n")
         for entry in unread:
             print("### " + entry.rstrip() + "\n")
         # 更新state到全部matched的最新timestamp (包括自己发的, 避免下次自己letter被当未读)
