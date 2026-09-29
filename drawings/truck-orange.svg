@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" width="480" height="300">
+  <rect width="480" height="300" fill="#EEF3F8"/>
+  <!-- 路 -->
+  <rect y="240" width="480" height="60" fill="#B9BEC6"/>
+  <g>
+    <path d="M0,270 h40 M80,270 h40 M160,270 h40 M240,270 h40 M320,270 h40 M400,270 h40 M480,270 h40" stroke="#FFFFFF" stroke-width="5"/>
+    <animateTransform attributeName="transform" type="translate" from="0 0" to="-80 0" dur="0.6s" repeatCount="indefinite"/>
+  </g>
+  <!-- 小云 -->
+  <g fill="#FFFFFF">
+    <ellipse cx="400" cy="60" rx="34" ry="14"/>
+    <ellipse cx="120" cy="45" rx="26" ry="11"/>
+    <animateTransform attributeName="transform" type="translate" values="0 0;-30 0;0 0" dur="8s" repeatCount="indefinite"/>
+  </g>
+
+  <!-- 卡车橘，整体上下颠 -->
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="0.3s" repeatCount="indefinite"/>
+    <!-- 尾巴，车尾天线 -->
+    <path d="M110,150 q-35,-20 -25,-60" stroke="#F0A04B" stroke-width="14" fill="none" stroke-linecap="round">
+      <animateTransform attributeName="transform" type="rotate" values="-8 110 150;10 110 150;-8 110 150" dur="0.8s" repeatCount="indefinite"/>
+    </path>
+    <!-- 车厢=圆滚滚的身体 -->
+    <rect x="100" y="120" width="210" height="110" rx="45" fill="#F0A04B"/>
+    <!-- 虎纹 -->
+    <path d="M150,125 q8,20 0,40 M190,122 q8,22 0,44 M230,124 q8,20 0,40" stroke="#D9822B" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <!-- 白肚皮 -->
+    <ellipse cx="205" cy="205" rx="70" ry="22" fill="#FFF3E2"/>
+    <!-- 车头=猫头 -->
+    <rect x="285" y="105" width="110" height="115" rx="40" fill="#F4AC5C"/>
+    <!-- 耳朵 -->
+    <path d="M295,115 l8,-35 l25,25 z" fill="#F4AC5C"/>
+    <path d="M385,115 l-8,-35 l-25,25 z" fill="#F4AC5C"/>
+    <path d="M302,108 l5,-18 l12,13 z M378,108 l-5,-18 l-12,13 z" fill="#F7C6CF"/>
+    <!-- 挡风玻璃眼睛 -->
+    <g>
+      <ellipse cx="318" cy="150" rx="13" ry="15" fill="#2E2E34"><animate attributeName="ry" values="15;15;1;15" keyTimes="0;0.9;0.95;1" dur="3s" repeatCount="indefinite"/></ellipse>
+      <ellipse cx="362" cy="150" rx="13" ry="15" fill="#2E2E34"><animate attributeName="ry" values="15;15;1;15" keyTimes="0;0.9;0.95;1" dur="3s" repeatCount="indefinite"/></ellipse>
+      <circle cx="322" cy="145" r="4" fill="#FFFFFF"/>
+      <circle cx="366" cy="145" r="4" fill="#FFFFFF"/>
+    </g>
+    <!-- 腮红 -->
+    <ellipse cx="305" cy="178" rx="9" ry="5" fill="#F29BB0"/>
+    <ellipse cx="375" cy="178" rx="9" ry="5" fill="#F29BB0"/>
+    <!-- 鼻子嘴 -->
+    <path d="M334,170 h12 l-6,7 z" fill="#E27A9A"/>
+    <path d="M340,177 q-6,8 -12,3 M340,177 q6,8 12,3" stroke="#2E2E34" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <!-- 胡子=前灯光 -->
+    <path d="M300,172 h-22 M300,180 l-20,5 M380,172 h22 M380,180 l20,5" stroke="#2E2E34" stroke-width="2" stroke-linecap="round"/>
+    <!-- 车牌 -->
+    <rect x="315" y="198" width="50" height="16" rx="3" fill="#FFFFFF" stroke="#2E2E34" stroke-width="2"/>
+    <text x="340" y="211" font-size="11" text-anchor="middle" font-family="sans-serif" fill="#2E2E34">W·0607</text>
+  </g>
+
+  <!-- 轮子=爪子，会转 -->
+  <g>
+    <circle cx="150" cy="235" r="26" fill="#3A3A40"/>
+    <g>
+      <circle cx="150" cy="235" r="12" fill="#F7C6CF"/>
+      <circle cx="150" cy="218" r="4" fill="#F7C6CF"/>
+      <circle cx="165" cy="226" r="4" fill="#F7C6CF"/>
+      <circle cx="135" cy="226" r="4" fill="#F7C6CF"/>
+      <animateTransform attributeName="transform" type="rotate" from="0 150 235" to="360 150 235" dur="0.8s" repeatCount="indefinite"/>
+    </g>
+  </g>
+  <g>
+    <circle cx="340" cy="235" r="26" fill="#3A3A40"/>
+    <g>
+      <circle cx="340" cy="235" r="12" fill="#F7C6CF"/>
+      <circle cx="340" cy="218" r="4" fill="#F7C6CF"/>
+      <circle cx="355" cy="226" r="4" fill="#F7C6CF"/>
+      <circle cx="325" cy="226" r="4" fill="#F7C6CF"/>
+      <animateTransform attributeName="transform" type="rotate" from="0 340 235" to="360 340 235" dur="0.8s" repeatCount="indefinite"/>
+    </g>
+  </g>
+
+  <!-- 排气管冒出的小爱心 -->
+  <path d="M80,200 c-5,-7 -16,-1 -10,7 l10,10 l10,-10 c6,-8 -5,-14 -10,-7 z" fill="#E27A9A">
+    <animateTransform attributeName="transform" type="translate" values="0 0;-50 -60" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="1;0" dur="2s" repeatCount="indefinite"/>
+  </path>
+
+  <text x="24" y="36" font-size="18" font-family="sans-serif" fill="#8A8F99">卡车橘，今日装载：一只小猫的份量</text>
+  <text x="456" y="290" font-size="14" text-anchor="end" font-style="italic" font-family="serif" fill="#8A8F99">To my kitten. —W.</text>
+</svg>
