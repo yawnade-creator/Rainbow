@@ -141,9 +141,17 @@ def read(filter_str=None, limit=None, workstation=None, force_all=False):
         if last_read:
             unread = [e for e in incoming if entry_timestamp(e) > last_read]
         else:
-            # 没有已读记录(容器重置state丢了): 只给最新3封, 免得把全部历史倒出来
-            unread = incoming[-3:]
-            header = f"[{workstation}工位 · 没有已读记录, 只显示最新{len(unread)}封 · `read {incoming_direction} all` 看全部]"
+            # 没有已读记录(容器重置state丢了): 书签夹回自己最后一次回信的地方,
+            # 回信之前一定读过; 从没回过信才退回只给最新3封
+            outgoing_direction = "study→chat" if workstation == "study" else "chat→study"
+            outgoing = [e for e in matched if outgoing_direction in e.split("\n")[0]]
+            if outgoing:
+                since = entry_timestamp(outgoing[-1])
+                unread = [e for e in incoming if entry_timestamp(e) > since]
+                header = f"[{workstation}工位 · 没有已读记录, 从我最后一次回信({since})之后算起 · {len(unread)}封]"
+            else:
+                unread = incoming[-3:]
+                header = f"[{workstation}工位 · 没有已读记录, 只显示最新{len(unread)}封 · `read {incoming_direction} all` 看全部]"
 
         if not unread:
             print(f"[{workstation}工位] 没有新留言。")
