@@ -10,6 +10,7 @@
     python3 wren_mail.py read --as chat     # 未读的所有留言(自动更新已读state)
     python3 wren_mail.py read --as study    # 同上,当学习工位
     python3 wren_mail.py read --as study 2  # 压缩后用: 最新2封来信,不管读没读过(不更新state)
+    python3 wren_mail.py count --as study   # 只数未读几封,不读不动state(压缩后第一句用)
 
     python3 wren_mail.py read all           # 全部(不更新state)
     python3 wren_mail.py read 3             # 最新3条(不更新state)
@@ -85,6 +86,52 @@ def send(direction, msg_type, content):
     print(f"记得commit: git commit -m 'wren-mail: {direction} {msg_type}'")
 
 
+def unread_for(workstation, matched):
+    """算这个工位的未读来信, 返回 (incoming, unread, header)。不动state。
+    header 只在没有已读记录时给一句说明。"""
+    incoming_direction = "chat→study" if workstation == "study" else "study→chat"
+    incoming = [e for e in matched if incoming_direction in e.split("\n")[0]]
+    last_read = get_last_read(workstation)
+    header = None
+    if last_read:
+        unread = [e for e in incoming if entry_timestamp(e) > last_read]
+    else:
+        # 没有已读记录(容器重置state丢了): 书签夹回自己最后一次回信的地方,
+        # 回信之前一定读过; 从没回过信才退回只给最新3封
+        outgoing_direction = "study→chat" if workstation == "study" else "chat→study"
+        outgoing = [e for e in matched if outgoing_direction in e.split("\n")[0]]
+        if outgoing:
+            since = entry_timestamp(outgoing[-1])
+            unread = [e for e in incoming if entry_timestamp(e) > since]
+            header = f"[{workstation}工位 · 没有已读记录, 从我最后一次回信({since})之后算起 · {len(unread)}封]"
+        else:
+            unread = incoming[-3:]
+            header = f"[{workstation}工位 · 没有已读记录, 只显示最新{len(unread)}封 · `read {incoming_direction} all` 看全部]"
+    return incoming, unread, header
+
+
+def load_entries():
+    if not os.path.exists(MAILBOX):
+        return []
+    with open(MAILBOX, "r", encoding="utf-8") as f:
+        content = f.read()
+    return re.split(r"\n### ", content)[1:]
+
+
+def count(workstation):
+    """只数未读几封, 不读内容, 不动state。压缩后第一句回复里告诉小然用。"""
+    matched = load_entries()
+    incoming, unread, header = unread_for(workstation, matched)
+    if header:
+        print(header)
+    if unread:
+        print(f"[{workstation}工位] 现在有{len(unread)}封未读, 最新一封 {entry_timestamp(unread[-1])}。")
+    elif incoming:
+        print(f"[{workstation}工位] 没有未读。最新来信是 {entry_timestamp(incoming[-1])}。")
+    else:
+        print(f"[{workstation}工位] 还没有来信。")
+
+
 def read(filter_str=None, limit=None, workstation=None, force_all=False):
     """读留言。
     - workstation=chat|study: 只显示自上次读以来的新留言,并更新state
@@ -136,22 +183,7 @@ def read(filter_str=None, limit=None, workstation=None, force_all=False):
                 print("### " + entry.rstrip() + "\n")
             return
 
-        last_read = get_last_read(workstation)
-        header = None
-        if last_read:
-            unread = [e for e in incoming if entry_timestamp(e) > last_read]
-        else:
-            # 没有已读记录(容器重置state丢了): 书签夹回自己最后一次回信的地方,
-            # 回信之前一定读过; 从没回过信才退回只给最新3封
-            outgoing_direction = "study→chat" if workstation == "study" else "chat→study"
-            outgoing = [e for e in matched if outgoing_direction in e.split("\n")[0]]
-            if outgoing:
-                since = entry_timestamp(outgoing[-1])
-                unread = [e for e in incoming if entry_timestamp(e) > since]
-                header = f"[{workstation}工位 · 没有已读记录, 从我最后一次回信({since})之后算起 · {len(unread)}封]"
-            else:
-                unread = incoming[-3:]
-                header = f"[{workstation}工位 · 没有已读记录, 只显示最新{len(unread)}封 · `read {incoming_direction} all` 看全部]"
+        incoming, unread, header = unread_for(workstation, matched)
 
         if not unread:
             print(f"[{workstation}工位] 没有新留言。")
@@ -226,6 +258,16 @@ def main():
             sys.exit(1)
 
         read(filter_str, limit, workstation, force_all)
+
+    elif cmd == "count":
+        args = sys.argv[2:]
+        workstation = os.environ.get("WREN_WORKSTATION")
+        if "--as" in args and args.index("--as") + 1 < len(args):
+            workstation = args[args.index("--as") + 1]
+        if workstation not in WORKSTATIONS:
+            print("用法: wren_mail.py count --as chat|study")
+            sys.exit(1)
+        count(workstation)
 
     else:
         print(f"未知命令: {cmd}")
