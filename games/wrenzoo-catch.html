@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>WrenZoo 接橘子</title>
+<style>
+html,body{margin:0;height:100%;overflow:hidden;background:#FFF6F0;touch-action:none;overscroll-behavior:none;-webkit-user-select:none;user-select:none;font-family:-apple-system,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif;color:#5a3a3a}
+#wrap{position:fixed;inset:0;width:100vw;height:100dvh;box-sizing:border-box;padding:max(16px,env(safe-area-inset-top)) 16px max(16px,env(safe-area-inset-bottom))}
+canvas{display:block;width:100%;height:100%;image-rendering:pixelated;border-radius:12px;background:#FFF6F0;outline:2px solid #F3DCD0}
+#hud{position:absolute;top:24px;left:28px;right:28px;display:flex;justify-content:space-between;font-weight:700;font-size:18px;pointer-events:none}
+.scr{position:absolute;inset:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px}
+.hide{display:none!important}
+h1{color:#C0567A;font-size:34px;margin:0}
+h2{color:#C0567A;font-size:56px;margin:0;letter-spacing:6px}
+p{margin:0;font-size:17px}
+.hint{font-size:13px;opacity:.7}
+button{margin-top:14px;font:inherit;font-size:20px;font-weight:700;color:#fff;background:#C0567A;border:0;border-radius:6px;padding:12px 40px;box-shadow:0 4px 0 #8f3b59}
+button:active{transform:translateY(3px);box-shadow:0 1px 0 #8f3b59}
+#foot{position:absolute;bottom:110px;font-size:12px;opacity:.6;font-style:italic}
+#toast{position:absolute;top:30%;left:0;right:0;text-align:center;font-size:24px;font-weight:700;color:#C0567A;pointer-events:none;transition:opacity .3s}
+#win{position:absolute;inset:16px}#winTxt{position:absolute!important;top:10%;left:0;right:0}
+#winBtn{position:absolute;top:66%;left:0;right:0;text-align:center}
+</style></head><body>
+<div id="wrap"><canvas id="c"></canvas>
+<div id="hud" class="hide"><span id="score">橘子 0 / 100</span><span id="hearts"></span></div>
+<div id="toast" style="opacity:0">呕，是椰蓉球</div>
+<div id="start" class="scr"><h1>WrenZoo 接橘子</h1><p>帮小螃蟹接满一百个橘子</p><button id="bStart">开始</button><p class="hint">左右拖动小螃蟹，躲开椰蓉球</p><div id="foot">To my kitten. —W.</div></div>
+<div id="over" class="scr hide"><h1>小螃蟹累了</h1><p id="overTxt"></p><button id="bOver">再来一次</button></div>
+<div id="win" class="hide"><div id="winTxt" class="scr" style="position:static"><h2>贴贴</h2><p>接满一百个橘子，小橘来了</p></div><div id="winBtn"><button id="bWin">再玩一次</button></div></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('c'),ctx=cv.getContext('2d');
+var $=function(i){return document.getElementById(i)};
+var PAL={B:'#D97757',D:'#B85E40',k:'#222',O:'#F0A04B',o:'#D9832F',G:'#5FA04E',W:'#EFE7D8',w:'#D8CCB4',x:'#A8987A',P:'#F7C6CF',p:'#F2A0B4',H:'#E27A9A',h:'#F5B3C6',c:'#D98A3A'};
+var CRAB=["CC........CC","CD........DC",".D........D.","..BBBBBBBB..",".BBkBBBBkBB.",".BBkBBBBkBB.","BBBBBBBBBBBB",".BBBBBBBBBB.","..D.D..D.D..","..D.D..D.D.."].map(function(r){return r.replace(/C/g,'B')});
+var ORANGE=["...GG..","..GG...",".OOOOO.","OOOOOOO","OOOOOOo","OOOOOoo",".OoooO."];
+var COCO=[".xWwWx.","xWWWwWx","WwWxWWw","WWwWWwW","wWxWWwx","xWWwWWx",".xwWxw."];
+var CAT=[".O...O.......","OPO.OPO......","OOOOOOO......","OkkOkkO.....c","pOOOOOp.....c","OOOOOOO....c.",".OOOOOOOOOOc.",".OOOOOOOOOO..",".OOOOOOOOOO..",".O.O....O.O.."];
+var HEART=[".HH.HH.","HhHHHHH","HHHHHHH",".HHHHH.","..HHH..","...H..."];
+function spr(a,x,y,s,flip){for(var r=0;r<a.length;r++)for(var i=0;i<a[r].length;i++){var ch=a[r][flip?a[r].length-1-i:i];if(ch==='.')continue;ctx.fillStyle=PAL[ch];ctx.fillRect(Math.round(x+i*s),Math.round(y+r*s),s,s)}}
+var W,H,S,dpr,crab,items,score,hearts,speed,spawnT,state='start',last=0,keys={},winT=0,toastT=0,dragX=null,tapDir=0;
+function resize(){dpr=window.devicePixelRatio||1;var r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);ctx.imageSmoothingEnabled=false;S=Math.max(3,Math.floor(Math.min(W,600)/70));if(crab)crab.y=H-CRAB.length*S-14}
+window.addEventListener('resize',resize);
+function reset(){resize();crab={x:W/2-6*S,y:H-CRAB.length*S-14,w:12*S};items=[];score=0;hearts=3;speed=1;spawnT=0;hud()}
+function hud(){$('score').textContent='橘子 '+score+' / 100';}
+function show(id){['start','over','win'].forEach(function(k){$(k).classList.toggle('hide',k!==id)});$('hud').classList.toggle('hide',!(id==='hud'||id==='win'||id==='over'))}
+function play(){reset();state='play';show('hud')}
+function toast(){$('toast').style.opacity=1;toastT=1.2}
+function spawn(){var coco=Math.random()<0.15+Math.min(0.1,score/1000);items.push({x:Math.random()*(W-7*S),y:-7*S,v:(110+Math.random()*50)*speed*(S/5),coco:coco})}
+function win(){state='win';winT=0;items=[];show('win');hud()}
+function update(dt){
+ if(state==='play'){
+  var mv=0;if(keys.ArrowLeft)mv-=1;if(keys.ArrowRight)mv+=1;mv+=tapDir;
+  var sp=W*0.9;
+  if(dragX!==null){crab.x+=(dragX-crab.w/2-crab.x)*Math.min(1,dt*18)}else crab.x+=mv*sp*dt;
+  crab.x=Math.max(0,Math.min(W-crab.w,crab.x));
+  speed=1+score*0.012;spawnT-=dt;if(spawnT<=0){spawn();spawnT=Math.max(0.35,0.9-score*0.005)}
+  for(var i=items.length-1;i>=0;i--){var it=items[i];it.y+=it.v*dt;var sz=7*S;
+   if(it.y+sz>crab.y+S&&it.y<crab.y+crab.w*0.5&&it.x+sz>crab.x&&it.x<crab.x+crab.w){items.splice(i,1);
+    if(it.coco){hearts--;toast();hud();if(hearts<=0){state='over';$('overTxt').textContent='这次接到了 '+score+' 个橘子';show('over');}}
+    else{score++;hud();if(score>=100){win();return}}continue}
+   if(it.y>H)items.splice(i,1)}
+ }
+ if(state==='win')winT+=dt;
+ if(toastT>0){toastT-=dt;if(toastT<=0)$('toast').style.opacity=0}
+}
+function ground(){ctx.fillStyle='#F3DCD0';ctx.fillRect(0,H-14,W,14);ctx.fillStyle='#EBC9B8';for(var x=0;x<W;x+=S*4)ctx.fillRect(x,H-14,S*2,S)}
+function draw(t){ctx.clearRect(0,0,W,H);ctx.fillStyle='#FFF6F0';ctx.fillRect(0,0,W,H);ground();
+ if(state==='play'||state==='over'){for(var i=0;i<3;i++){if(i<hearts)spr(HEART,W-12-(3-i)*8*3,12,3);else{ctx.globalAlpha=.25;spr(HEART,W-12-(3-i)*8*3,12,3);ctx.globalAlpha=1}}}
+ if(state==='start'){spr(CRAB,W/2-6*S,H-CRAB.length*S-14,S);spr(ORANGE,W/2-3.5*S,H*0.7+Math.sin(t/300)*6,S);return}
+ items.forEach(function(it){spr(it.coco?COCO:ORANGE,it.x,it.y,S)});
+ var bob=(state==='play'&&(keys.ArrowLeft||keys.ArrowRight||dragX!==null||tapDir))?(Math.floor(t/120)%2):0;
+ if(state==='win'){
+  var cx=W/2-crab.w-S;crab.x+= (cx-crab.x)*0.1;
+  var target=crab.x+crab.w-S, start=W+2*S, catW=13*S;
+  var catX=Math.max(target,start-winT*W*0.45), cy=H-14-CAT.length*S;
+  var walking=catX>target;spr(CRAB,crab.x,crab.y,S);
+  spr(CAT,catX,cy-(walking&&Math.floor(t/150)%2?S:0),S);
+  if(!walking){var hs=S*1.4;spr(HEART,target-3.5*hs,cy-9*hs-Math.sin(t/400)*8-Math.min(1,winT-2)*0,hs)}
+  return}
+ spr(CRAB,crab.x,crab.y-bob*S*0.5,S);
+}
+function loop(t){var dt=Math.min(0.05,(t-last)/1000||0);last=t;update(dt);draw(t);requestAnimationFrame(loop)}
+addEventListener('keydown',function(e){keys[e.key]=1;if(e.key.indexOf('Arrow')===0)e.preventDefault()});
+addEventListener('keyup',function(e){keys[e.key]=0});
+var downX=0,moved=false;
+cv.addEventListener('pointerdown',function(e){var r=cv.getBoundingClientRect();downX=e.clientX-r.left;moved=false;
+ if(state!=='play')return;var cx=crab.x+crab.w/2;if(Math.abs(downX-cx)<crab.w*1.2)dragX=downX;else tapDir=downX<W/2?-1:1;cv.setPointerCapture(e.pointerId)});
+cv.addEventListener('pointermove',function(e){if(state!=='play'||e.buttons===0&&e.pointerType==='mouse')return;var r=cv.getBoundingClientRect(),x=e.clientX-r.left;if(Math.abs(x-downX)>8||dragX!==null){dragX=x;tapDir=0}});
+function up(){dragX=null;tapDir=0}
+cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
+['touchmove','gesturestart','dblclick'].forEach(function(n){document.addEventListener(n,function(e){e.preventDefault()},{passive:false})});
+$('bStart').onclick=play;$('bOver').onclick=play;$('bWin').onclick=play;
+reset();
+var hsh=location.hash;
+if(hsh==='#play'){play();score=42;hud();for(var i=0;i<5;i++){spawn();items[i].y=H*(0.1+i*0.15);items[i].coco=i===2}toast()}
+if(hsh==='#win'){play();score=100;win();winT=5}
+requestAnimationFrame(loop);
+})();
+</script></body></html>
