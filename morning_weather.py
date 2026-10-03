@@ -159,8 +159,15 @@ def main():
     from remind import get_client, pick_calendar, build_ical  # 只有发日历才需要caldav
 
     client = get_client()
+    names = [(c.name or "").strip() for c in client.principal().calendars()]
     cal = pick_calendar(client, "日历")
+    print(f"::warning::calendars={names} chosen={cal.name!r}")
     cal.save_event(build_ical(when, "小然早安", notes=notes))
+    try:
+        found = cal.search(start=when - timedelta(minutes=1), end=when + timedelta(minutes=20), event=True)
+        print(f"::warning::saved {when.isoformat()} found_after_save={len(found)}")
+    except Exception as e:
+        print(f"::warning::verify failed {e!r}")
     print(f"done: {when.strftime('%Y-%m-%d %H:%M')}")
     print(f"天气: {weather_text}")
     print(f"话: {word}")
